@@ -56,15 +56,55 @@
 		C63EF7962A221EAA00A482EB /* Currency */ = {
 			isa = PBXGroup;
 			children = (
-				C63EF7972A221EAA00A482EB /* AppDelegate.swift */,
-				C63EF7992A221EAA00A482EB /* SceneDelegate.swift */,
+				C63EF7AC2A2221DE00A482EB /* Modules */,
+				C63EF7AB2A2221CC00A482EB /* App */,
 				C63EF79B2A221EAA00A482EB /* ViewController.swift */,
-				C63EF79D2A221EAA00A482EB /* Main.storyboard */,
-				C63EF7A02A221EAB00A482EB /* Assets.xcassets */,
-				C63EF7A22A221EAB00A482EB /* LaunchScreen.storyboard */,
-				C63EF7A52A221EAB00A482EB /* Info.plist */,
 			);
 			path = Currency;
+			sourceTree = "<group>";
+		};
+		C63EF7AB2A2221CC00A482EB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C63EF7AF2A22225C00A482EB /* Miscellaneous */,
+				C63EF7AE2A22223F00A482EB /* Delegate */,
+				C63EF7AD2A22222900A482EB /* Storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C63EF7AC2A2221DE00A482EB /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C63EF7AD2A22222900A482EB /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C63EF79D2A221EAA00A482EB /* Main.storyboard */,
+				C63EF7A22A221EAB00A482EB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		C63EF7AE2A22223F00A482EB /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				C63EF7972A221EAA00A482EB /* AppDelegate.swift */,
+				C63EF7992A221EAA00A482EB /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		C63EF7AF2A22225C00A482EB /* Miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				C63EF7A02A221EAB00A482EB /* Assets.xcassets */,
+				C63EF7A52A221EAB00A482EB /* Info.plist */,
+			);
+			path = Miscellaneous;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +329,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z3SPAA69G7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Currency/Info.plist;
+				INFOPLIST_FILE = Currency/App/Miscellaneous/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -322,7 +362,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z3SPAA69G7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Currency/Info.plist;
+				INFOPLIST_FILE = Currency/App/Miscellaneous/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
