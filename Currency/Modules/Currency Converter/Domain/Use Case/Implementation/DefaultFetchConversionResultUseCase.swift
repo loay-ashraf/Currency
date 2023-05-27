@@ -8,7 +8,11 @@
 import RxSwift
 
 class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
+    private let respository: CurrencyConverterRepository
+    init(respository: CurrencyConverterRepository) {
+        self.respository = respository
+    }
     func execute(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
-        Observable.just(CurrencyConversionResult.init(value: amount))
+        respository.fetchConversionResult(base, target, amount)
     }
 }

@@ -8,10 +8,26 @@
 import RxSwift
 
 class DefaultCurrencyConverterRemoteDataSource: CurrencyConverterRemoteDataSource {
-    func fetchSymbols() -> Observable<CurrencySymbolsJSON> {
-        NetworkManager.shared.request(using: CurrencyConverterRouter.symbols)
+    private let networkManager: NetworkManager
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
     }
-    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConvertResultJSON> {
-        NetworkManager.shared.request(using: CurrencyConverterRouter.conversion(base: base, target: target, amount: amount))
+    func fetchSymbols() -> Observable<[String]> {
+        let requestRouter = CurrencyConverterRouter.symbols
+        let responseObservable: Observable<CurrencySymbolsJSON> = networkManager.request(using: requestRouter)
+        let mappedResponseObservable = responseObservable
+            .map {
+                Array($0.symbols.keys)
+            }
+        return mappedResponseObservable
+    }
+    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<Double> {
+        let requestRouter = CurrencyConverterRouter.conversion(base: base, target: target, amount: amount)
+        let responseObservable: Observable<CurrencyConvertResultJSON> = networkManager.request(using: requestRouter)
+        let mappedResponseObservable = responseObservable
+            .map {
+                $0.result
+            }
+        return mappedResponseObservable
     }
 }

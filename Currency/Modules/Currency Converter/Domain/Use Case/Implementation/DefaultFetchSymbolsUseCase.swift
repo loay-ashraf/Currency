@@ -8,7 +8,11 @@
 import RxSwift
 
 class DefaultFetchSymbolsUseCase: FetchSymbolsUseCase {
+    private let repository: CurrencyConverterRepository
+    init(repository: CurrencyConverterRepository) {
+        self.repository = repository
+    }
     func execute() -> Observable<CurrencySymbols> {
-        Observable.just(CurrencySymbols.init(value: []))
+        repository.fetchSymbols()
     }
 }

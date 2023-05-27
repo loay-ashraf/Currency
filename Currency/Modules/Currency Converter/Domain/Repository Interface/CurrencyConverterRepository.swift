@@ -5,9 +5,9 @@
 //  Created by Loay Ashraf on 27/05/2023.
 //
 
+import RxSwift
+
 protocol CurrencyConverterRepository {
-    associatedtype SymbolsReturnType
-    associatedtype ConversionResultReturnType
-    func fetchSymbols() -> SymbolsReturnType
-    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> ConversionResultReturnType
+    func fetchSymbols() -> Observable<CurrencySymbols>
+    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult>
 }
