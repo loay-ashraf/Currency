@@ -18,7 +18,7 @@ class CurrencyConverterViewModel {
     // MARK: - Inputs
     private(set) var selectedBaseCurrency: BehaviorRelay<String> = .init(value: "")
     private(set) var selectedTargetCurrency: BehaviorRelay<String> = .init(value: "")
-    private(set) var baseCurrencyAmount: BehaviorRelay<Double> = .init(value: 0.0)
+    private(set) var baseCurrencyAmount: BehaviorRelay<Double> = .init(value: 1.0)
     // MARK: - Outputs
     private(set) var currencySymbols: Driver<[String]>!
     private(set) var targetCurrencyAmount: Driver<Double>!

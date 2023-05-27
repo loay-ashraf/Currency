@@ -11,22 +11,36 @@ enum CurrencyConverterRouter: NetworkRouter {
     case symbols
     case conversion(base: String, target: String, amount: Double)
     var scheme: HTTPScheme {
-        .https
+        .http
     }
     var method: HTTPMethod {
         .get
     }
     var domain: String {
-        "api.github.com"
+        "data.fixer.io"
     }
     var path: String {
-        "users"
+        switch self {
+        case .symbols:
+            return "api/symbols"
+        case .conversion:
+            return "api/convert"
+        }
     }
     var headers: [String : String] {
-        ["Accept": "application/vnd.github+json"]
+        ["Accept": "application/json"]
     }
     var parameters: [String : String]? {
-        nil
+        var parameters: [String: String] = ["access_key": "7d80b5334c7a102a84071ac77c135d63"]
+        switch self {
+        case .symbols:
+            return parameters
+        case .conversion(let base, let target, let amount):
+            parameters["from"] = base
+            parameters["to"] = target
+            parameters["amount"] = "\(amount)"
+            return parameters
+        }
     }
     var body: [String : Any]? {
         nil

@@ -10,10 +10,15 @@ import RxSwift
 import RxCocoa
 
 class CurrencyConverterViewController: UIViewController {
-
-    private let items = Observable.of(["EUR", "USD", "GBP", "EGP", "SAR"])
-    private let disposeBag: DisposeBag = .init()
-    
+    private let viewModel: CurrencyConverterViewModel = {
+        let dataSource = DefaultCurrencyConverterRemoteDataSource(networkManager: .shared)
+        let repository = DefaultCurrencyConverterRepository(dataSource: dataSource)
+        let fetchSymbolsUseCase = DefaultFetchSymbolsUseCase(repository: repository)
+        let fetchConversionResultUseCase = DefaultFetchConversionResultUseCase(respository: repository)
+        let viewModel = CurrencyConverterViewModel(fetchSymbolsUseCase: fetchSymbolsUseCase, fetchConversionResultUseCase: fetchConversionResultUseCase)
+        return viewModel
+    }()
+    private let disposeBag = DisposeBag()
     @IBOutlet weak var currencyConverterStackView: UIStackView!
     @IBOutlet weak var fromCurrencyButton: UIButton!
     @IBOutlet weak var toCurrencyButton: UIButton!
@@ -28,14 +33,12 @@ class CurrencyConverterViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupUI()
-        items
-            .asDriver(onErrorJustReturn: [])
+        viewModel.currencySymbols
             .drive(fromCurrencyPickerView.rx.itemTitles) { row, element in
                 return element
             }
             .disposed(by: disposeBag)
-        items
-            .asDriver(onErrorJustReturn: [])
+        viewModel.currencySymbols
             .drive(toCurrencyPickerView.rx.itemTitles) { row, element in
                 return element
             }
@@ -43,11 +46,23 @@ class CurrencyConverterViewController: UIViewController {
         fromCurrencyPickerView.rx.modelSelected(String.self)
             .bind(onNext: { models in
                 self.fromCurrencyButton.setTitle(models[0], for: .normal)
+                self.viewModel.selectedBaseCurrency.accept(models[0])
+            })
+            .disposed(by: disposeBag)
+        viewModel.baseCurrencyAmount
+            .bind(onNext: {
+                self.fromCurrencyValueLabel.text = "\($0)"
+            })
+            .disposed(by: disposeBag)
+        viewModel.targetCurrencyAmount
+            .drive(onNext: {
+                self.toCurrencyValueLabel.text = "\($0)"
             })
             .disposed(by: disposeBag)
         toCurrencyPickerView.rx.modelSelected(String.self)
             .bind(onNext: { models in
                 self.toCurrencyButton.setTitle(models[0], for: .normal)
+                self.viewModel.selectedTargetCurrency.accept(models[0])
             })
             .disposed(by: disposeBag)
         fromCurrencyButton.rx.tap
@@ -62,8 +77,8 @@ class CurrencyConverterViewController: UIViewController {
                 self.toCurrencyPickerView.isHidden.toggle()
             })
             .disposed(by: disposeBag)
+        viewModel.viewState.accept(.loading(loadType: .initial))
     }
-
     private func setupUI() {
         currencyConverterStackView.setRadiusAndShadow()
         currencyConverterStackView.backgroundColor = .lightGray
