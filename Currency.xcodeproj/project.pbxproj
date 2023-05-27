@@ -37,6 +37,93 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C622787B2A222473008A71DC /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C62278812A22250C008A71DC /* Model */,
+				C62278802A222505008A71DC /* View Model */,
+				C622787F2A2224FC008A71DC /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C622787C2A222486008A71DC /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C62278842A222529008A71DC /* Repository Interface */,
+				C62278832A22251E008A71DC /* Use Case */,
+				C62278822A222518008A71DC /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C622787D2A22248D008A71DC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C62278852A22253D008A71DC /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C622787E2A222492008A71DC /* Currency Converter */ = {
+			isa = PBXGroup;
+			children = (
+				C622787D2A22248D008A71DC /* Data */,
+				C622787C2A222486008A71DC /* Domain */,
+				C622787B2A222473008A71DC /* Presentation */,
+			);
+			path = "Currency Converter";
+			sourceTree = "<group>";
+		};
+		C622787F2A2224FC008A71DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C62278802A222505008A71DC /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		C62278812A22250C008A71DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C62278822A222518008A71DC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		C62278832A22251E008A71DC /* Use Case */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Use Case";
+			sourceTree = "<group>";
+		};
+		C62278842A222529008A71DC /* Repository Interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Repository Interface";
+			sourceTree = "<group>";
+		};
+		C62278852A22253D008A71DC /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		C63EF78B2A221EAA00A482EB = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +163,7 @@
 		C63EF7AC2A2221DE00A482EB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C622787E2A222492008A71DC /* Currency Converter */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
