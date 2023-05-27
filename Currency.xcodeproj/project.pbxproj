@@ -7,19 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C62278892A222609008A71DC /* CurrencyConverter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62278882A222609008A71DC /* CurrencyConverter.storyboard */; };
+		C622788D2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */; };
+		C62278972A2238C2008A71DC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C62278962A2238C2008A71DC /* RxCocoa */; };
+		C62278992A2238C2008A71DC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C62278982A2238C2008A71DC /* RxSwift */; };
 		C63EF7982A221EAA00A482EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63EF7972A221EAA00A482EB /* AppDelegate.swift */; };
 		C63EF79A2A221EAA00A482EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63EF7992A221EAA00A482EB /* SceneDelegate.swift */; };
-		C63EF79C2A221EAA00A482EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63EF79B2A221EAA00A482EB /* ViewController.swift */; };
+		C63EF79C2A221EAA00A482EB /* CurrencyConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63EF79B2A221EAA00A482EB /* CurrencyConverterViewController.swift */; };
 		C63EF79F2A221EAA00A482EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C63EF79D2A221EAA00A482EB /* Main.storyboard */; };
 		C63EF7A12A221EAB00A482EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C63EF7A02A221EAB00A482EB /* Assets.xcassets */; };
 		C63EF7A42A221EAB00A482EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C63EF7A22A221EAB00A482EB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C62278882A222609008A71DC /* CurrencyConverter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrencyConverter.storyboard; sourceTree = "<group>"; };
+		C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SetRadiusAndShadow.swift"; sourceTree = "<group>"; };
 		C63EF7942A221EAA00A482EB /* Currency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Currency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63EF7972A221EAA00A482EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C63EF7992A221EAA00A482EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C63EF79B2A221EAA00A482EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C63EF79B2A221EAA00A482EB /* CurrencyConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewController.swift; sourceTree = "<group>"; };
 		C63EF79E2A221EAA00A482EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C63EF7A02A221EAB00A482EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C63EF7A32A221EAB00A482EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -31,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C62278992A2238C2008A71DC /* RxSwift in Frameworks */,
+				C62278972A2238C2008A71DC /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +86,8 @@
 		C622787F2A2224FC008A71DC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C62278872A2225EC008A71DC /* Storyboard */,
+				C62278862A2225D2008A71DC /* Controller */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,6 +134,38 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		C62278862A2225D2008A71DC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C63EF79B2A221EAA00A482EB /* CurrencyConverterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C62278872A2225EC008A71DC /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C62278882A222609008A71DC /* CurrencyConverter.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		C622788A2A2234BC008A71DC /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				C622788B2A2234C2008A71DC /* Extensions */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		C622788B2A2234C2008A71DC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C63EF78B2A221EAA00A482EB = {
 			isa = PBXGroup;
 			children = (
@@ -143,9 +185,9 @@
 		C63EF7962A221EAA00A482EB /* Currency */ = {
 			isa = PBXGroup;
 			children = (
+				C622788A2A2234BC008A71DC /* Support */,
 				C63EF7AC2A2221DE00A482EB /* Modules */,
 				C63EF7AB2A2221CC00A482EB /* App */,
-				C63EF79B2A221EAA00A482EB /* ViewController.swift */,
 			);
 			path = Currency;
 			sourceTree = "<group>";
@@ -211,6 +253,10 @@
 			dependencies = (
 			);
 			name = Currency;
+			packageProductDependencies = (
+				C62278962A2238C2008A71DC /* RxCocoa */,
+				C62278982A2238C2008A71DC /* RxSwift */,
+			);
 			productName = Currency;
 			productReference = C63EF7942A221EAA00A482EB /* Currency.app */;
 			productType = "com.apple.product-type.application";
@@ -239,6 +285,9 @@
 				Base,
 			);
 			mainGroup = C63EF78B2A221EAA00A482EB;
+			packageReferences = (
+				C62278952A2238C2008A71DC /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = C63EF7952A221EAA00A482EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -255,6 +304,7 @@
 			files = (
 				C63EF7A42A221EAB00A482EB /* LaunchScreen.storyboard in Resources */,
 				C63EF7A12A221EAB00A482EB /* Assets.xcassets in Resources */,
+				C62278892A222609008A71DC /* CurrencyConverter.storyboard in Resources */,
 				C63EF79F2A221EAA00A482EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,9 +316,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C63EF79C2A221EAA00A482EB /* ViewController.swift in Sources */,
+				C63EF79C2A221EAA00A482EB /* CurrencyConverterViewController.swift in Sources */,
 				C63EF7982A221EAA00A482EB /* AppDelegate.swift in Sources */,
 				C63EF79A2A221EAA00A482EB /* SceneDelegate.swift in Sources */,
+				C622788D2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +472,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = CurrencyConverter;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -454,7 +505,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = CurrencyConverter;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -496,6 +547,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C62278952A2238C2008A71DC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C62278962A2238C2008A71DC /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62278952A2238C2008A71DC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		C62278982A2238C2008A71DC /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62278952A2238C2008A71DC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C63EF78C2A221EAA00A482EB /* Project object */;
 }
