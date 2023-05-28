@@ -39,7 +39,28 @@ class CurrencyConverterViewModel {
         setupOutputBindings()
     }
     private func setupViewStateBindings() {
-        let currencySymbolsObservable = viewState
+        let symbolsObservable = setupSymbolsObservable()
+        let initialBaseConversionResultObservable = setupInitialConversionObservable()
+        let baseConversionResultObservable = setupBaseConverionObservable()
+        let targetConversionResultObservable = setupTargetConversionObservable()
+        let mergedErrorsObservable = Observable.merge([symbolsObservable.compactMap { $0.error as? NetworkError },
+                                                        initialBaseConversionResultObservable.compactMap { $0.error as? NetworkError },
+                                                        baseConversionResultObservable.compactMap { $0.error as? NetworkError },
+                                                        targetConversionResultObservable.compactMap { $0.error as? NetworkError }])
+        currencySymbols = symbolsObservable
+            .compactMap { $0.element }
+            .asDriver(onErrorJustReturn: [])
+        baseCurrencyAmountOutput = targetConversionResultObservable
+            .compactMap({ $0.element })
+            .asDriver(onErrorJustReturn: 0.0)
+        targetCurrencyAmountOutput = Observable.merge([initialBaseConversionResultObservable, baseConversionResultObservable])
+            .compactMap({ $0.element })
+            .asDriver(onErrorJustReturn: 0.0)
+        error = mergedErrorsObservable
+            .asDriver(onErrorJustReturn: NetworkError.client(.transport(NSError(domain: "", code: 1, userInfo: nil))))
+    }
+    private func setupSymbolsObservable() -> Observable<Event<[String]>> {
+        let symbolsObservable = viewState
             .filter( { ![.idle, .loading(loadType: .baseDriven), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
             .flatMapLatest { _ in
                 let conversionResultObservable = self.fetchSymbolsUseCase.execute()
@@ -50,6 +71,9 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
+        return symbolsObservable
+    }
+    private func setupInitialConversionObservable() -> Observable<Event<Double>> {
         let initialBaseConversionResultObservable = viewState
             .filter( { ![.idle, .loading(loadType: .baseDriven), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
             .flatMapLatest { _ in
@@ -63,6 +87,9 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
+        return initialBaseConversionResultObservable
+    }
+    func setupBaseConverionObservable() -> Observable<Event<Double>> {
         let baseConversionResultObservable = viewState
             .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
@@ -77,6 +104,9 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
+        return baseConversionResultObservable
+    }
+    private func setupTargetConversionObservable() -> Observable<Event<Double>> {
         let targetConversionResultObservable = viewState
             .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .baseDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
@@ -91,21 +121,7 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
-        let mergedErrorsObservable = Observable.merge([currencySymbolsObservable.compactMap { $0.error as? NetworkError },
-                                                        initialBaseConversionResultObservable.compactMap { $0.error as? NetworkError },
-                                                        baseConversionResultObservable.compactMap { $0.error as? NetworkError },
-                                                        targetConversionResultObservable.compactMap { $0.error as? NetworkError }])
-        currencySymbols = currencySymbolsObservable
-            .compactMap { $0.element }
-            .asDriver(onErrorJustReturn: [])
-        baseCurrencyAmountOutput = targetConversionResultObservable
-            .compactMap({ $0.element })
-            .asDriver(onErrorJustReturn: 0.0)
-        targetCurrencyAmountOutput = Observable.merge([initialBaseConversionResultObservable, baseConversionResultObservable])
-            .compactMap({ $0.element })
-            .asDriver(onErrorJustReturn: 0.0)
-        error = mergedErrorsObservable
-            .asDriver(onErrorJustReturn: NetworkError.client(.transport(NSError(domain: "", code: 1, userInfo: nil))))
+        return targetConversionResultObservable
     }
     private func setupInputBindings() {
         selectedBaseCurrency

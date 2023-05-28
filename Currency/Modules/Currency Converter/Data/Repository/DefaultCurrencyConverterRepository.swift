@@ -14,18 +14,10 @@ class DefaultCurrencyConverterRepository: CurrencyConverterRepository {
     }
     func fetchSymbols() -> Observable<[String]> {
         let symbolsObservable = dataSource.fetchSymbols()
-//        let mappedSymbolsObservable = symbolsObservable
-//            .map {
-//                CurrencySymbols(value: $0)
-//            }
         return symbolsObservable
     }
     func fetchConversionRate(_ target: String) -> Observable<Double> {
         let conversionRateObservable = dataSource.fetchConversionRate(target)
-//        let mappedConversionResultObservable = conversionResultObservable
-//            .map {
-//                CurrencyConversionResult(value: $0)
-//            }
         return conversionRateObservable
     }
 }
