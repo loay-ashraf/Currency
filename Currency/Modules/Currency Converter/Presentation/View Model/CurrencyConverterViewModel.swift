@@ -50,6 +50,19 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
+        let initialBaseConversionResultObservable = viewState
+            .filter( { ![.idle, .loading(loadType: .baseDriven), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
+            .flatMapLatest { _ in
+                let conversionResultObservable = self.fetchConversionResultUseCase.execute(self.selectedBaseCurrency.value,
+                                                                                           self.selectedTargetCurrency.value,
+                                                                                           self.baseCurrencyAmountInput.value)
+                    .map {
+                        $0.value
+                    }
+                    .materialize()
+                return conversionResultObservable
+            }
+            .share()
         let baseConversionResultObservable = viewState
             .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
@@ -79,6 +92,7 @@ class CurrencyConverterViewModel {
             }
             .share()
         let mergedOutputsObservable = Observable.merge([currencySymbolsObservable.map { $0 as AnyObject },
+                                                        initialBaseConversionResultObservable.map { $0 as AnyObject },
                                                         baseConversionResultObservable.map { $0 as AnyObject },
                                                         targetConversionResultObservable.map { $0 as AnyObject }])
         currencySymbols = currencySymbolsObservable
@@ -87,7 +101,7 @@ class CurrencyConverterViewModel {
         baseCurrencyAmountOutput = targetConversionResultObservable
             .compactMap({ $0.element })
             .asDriver(onErrorJustReturn: 0.0)
-        targetCurrencyAmountOutput = baseConversionResultObservable
+        targetCurrencyAmountOutput = Observable.merge([initialBaseConversionResultObservable, baseConversionResultObservable])
             .compactMap({ $0.element })
             .asDriver(onErrorJustReturn: 0.0)
         error = mergedOutputsObservable
