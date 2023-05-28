@@ -102,8 +102,8 @@ class CurrencyConverterViewController: UIViewController {
             .disposed(by: disposeBag)
         viewModel.currencySymbols
             .do(afterNext: { symbols in
-                let defaultToCurrency = "EUR"
-                guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
+                let defaultFromCurrency = "EUR"
+                guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultFromCurrency) else { return }
                 self.fromCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
             })
             .drive(fromCurrencyPickerView.rx.itemTitles) { row, element in
