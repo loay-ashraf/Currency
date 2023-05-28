@@ -26,17 +26,24 @@
                                     </tableView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="vGk-3f-OEe">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nRL-Ui-wUA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="1qB-ad-bk1"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="nRL-Ui-wUA" secondAttribute="bottom" constant="20" id="S2D-gs-TbY"/>
+                            <constraint firstItem="vGk-3f-OEe" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="bSJ-qz-9tC"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nRL-Ui-wUA" secondAttribute="trailing" constant="20" id="tUe-cH-Ohy"/>
                             <constraint firstItem="nRL-Ui-wUA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="wyd-9Q-FFN"/>
+                            <constraint firstItem="vGk-3f-OEe" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="y12-iV-XO7"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="vGk-3f-OEe" id="ACV-pJ-jpl"/>
                         <outlet property="rateHistoryTableView" destination="bD7-Yw-xks" id="BlV-71-2v0"/>
                         <outlet property="view" destination="bD7-Yw-xks" id="SxP-KD-hIa"/>
                     </connections>
