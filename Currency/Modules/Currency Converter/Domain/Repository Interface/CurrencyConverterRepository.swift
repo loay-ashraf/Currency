@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol CurrencyConverterRepository {
-    func fetchSymbols() -> Observable<CurrencySymbols>
-    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult>
+    func fetchSymbols() -> Observable<[String]>
+    func fetchConversionRate(_ target: String) -> Observable<Double>
 }

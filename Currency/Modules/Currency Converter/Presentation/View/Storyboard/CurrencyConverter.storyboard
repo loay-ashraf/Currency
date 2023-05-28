@@ -21,24 +21,23 @@
                                 <rect key="frame" x="50" y="216" width="293" height="110"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0JP-n5-YQe">
-                                        <rect key="frame" x="15.000000000000004" y="10" width="63.333333333333343" height="90"/>
+                                        <rect key="frame" x="15" y="10" width="91.666666666666671" height="90"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IN5-v2-z5B">
-                                                <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="A4v-gT-1zd"/>
                                                 </constraints>
                                                 <buttonConfiguration key="configuration" style="plain" title="From"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpl-o6-PP0">
-                                                <rect key="frame" x="0.0" y="50" width="63.333333333333336" height="40"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jYp-DO-gZ0">
+                                                <rect key="frame" x="0.0" y="50" width="91.666666666666671" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Hja-jM-Ai7"/>
+                                                    <constraint firstAttribute="height" constant="40" id="FLW-CZ-VKt"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                            </textField>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-YP-8bx">
@@ -51,25 +50,24 @@
                                         <state key="normal" image="arrow.left.arrow.right" catalog="system"/>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="STW-ek-bZ2">
-                                        <rect key="frame" x="214.66666666666669" y="10" width="63.333333333333314" height="90"/>
+                                        <rect key="frame" x="186.66666666666666" y="10" width="91.333333333333343" height="90"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXy-j2-0TM">
-                                                <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="91.333333333333329" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="IYl-Hy-Zej"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="To"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Har-RD-6Fk">
-                                                <rect key="frame" x="0.0" y="50" width="63.333333333333336" height="40"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K8h-OY-93V">
+                                                <rect key="frame" x="0.0" y="50" width="91.333333333333329" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="8Iu-Xk-eMU"/>
+                                                    <constraint firstAttribute="height" constant="40" id="ew2-dY-tco"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                            </textField>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -113,13 +111,13 @@
                     <connections>
                         <outlet property="currencyConverterStackView" destination="fh3-l6-wxf" id="yM6-0Q-6X7"/>
                         <outlet property="currencyDetailsButton" destination="0AX-9v-joV" id="jtH-8A-zH4"/>
+                        <outlet property="fromCurrencyAmountTextField" destination="jYp-DO-gZ0" id="vMC-7w-HZq"/>
                         <outlet property="fromCurrencyButton" destination="IN5-v2-z5B" id="BKf-iQ-Pl5"/>
                         <outlet property="fromCurrencyPickerView" destination="16X-xp-dn1" id="C49-mR-0oh"/>
-                        <outlet property="fromCurrencyValueLabel" destination="jpl-o6-PP0" id="fpC-hv-iU3"/>
                         <outlet property="swapCurrencyButton" destination="xXm-YP-8bx" id="rBB-P3-JoT"/>
+                        <outlet property="toCurrencyAmountTextField" destination="K8h-OY-93V" id="GXw-6i-sM8"/>
                         <outlet property="toCurrencyButton" destination="pXy-j2-0TM" id="ukf-GK-a8q"/>
                         <outlet property="toCurrencyPickerView" destination="2oo-CO-lKQ" id="eya-Ie-K9O"/>
-                        <outlet property="toCurrencyValueLabel" destination="Har-RD-6Fk" id="Dsy-H0-F9d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

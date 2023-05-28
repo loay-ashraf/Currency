@@ -7,7 +7,8 @@
 
 enum ViewLoadType {
     case initial
-    case normal
+    case baseDriven
+    case targetDriven
     case refresh
     case paginate
 }

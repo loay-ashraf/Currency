@@ -9,7 +9,7 @@ import Foundation
 
 enum CurrencyConverterRouter: NetworkRouter {
     case symbols
-    case conversion(base: String, target: String, amount: Double)
+    case rate(target: String)
     var scheme: HTTPScheme {
         .http
     }
@@ -23,8 +23,8 @@ enum CurrencyConverterRouter: NetworkRouter {
         switch self {
         case .symbols:
             return "api/symbols"
-        case .conversion:
-            return "api/convert"
+        case .rate:
+            return "api/latest"
         }
     }
     var headers: [String : String] {
@@ -35,10 +35,9 @@ enum CurrencyConverterRouter: NetworkRouter {
         switch self {
         case .symbols:
             return parameters
-        case .conversion(let base, let target, let amount):
-            parameters["from"] = base
-            parameters["to"] = target
-            parameters["amount"] = "\(amount)"
+        case .rate(let target):
+            parameters["base"] = "EUR"
+            parameters["symbols"] = target
             return parameters
         }
     }

@@ -21,12 +21,12 @@ class DefaultCurrencyConverterRemoteDataSource: CurrencyConverterRemoteDataSourc
             }
         return mappedResponseObservable
     }
-    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<Double> {
-        let requestRouter = CurrencyConverterRouter.conversion(base: base, target: target, amount: amount)
+    func fetchConversionRate(_ target: String) -> Observable<Double> {
+        let requestRouter = CurrencyConverterRouter.rate(target: target)
         let responseObservable: Observable<CurrencyConvertResultJSON> = networkManager.request(using: requestRouter)
         let mappedResponseObservable = responseObservable
             .map {
-                $0.result
+                $0.rates.values.first ?? 0.0
             }
         return mappedResponseObservable
     }

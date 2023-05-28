@@ -12,20 +12,20 @@ class DefaultCurrencyConverterRepository: CurrencyConverterRepository {
     init(dataSource: CurrencyConverterRemoteDataSource) {
         self.dataSource = dataSource
     }
-    func fetchSymbols() -> Observable<CurrencySymbols> {
+    func fetchSymbols() -> Observable<[String]> {
         let symbolsObservable = dataSource.fetchSymbols()
-        let mappedSymbolsObservable = symbolsObservable
-            .map {
-                CurrencySymbols(value: $0)
-            }
-        return mappedSymbolsObservable
+//        let mappedSymbolsObservable = symbolsObservable
+//            .map {
+//                CurrencySymbols(value: $0)
+//            }
+        return symbolsObservable
     }
-    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
-        let conversionResultObservable = dataSource.fetchConversionResult(base, target, amount)
-        let mappedConversionResultObservable = conversionResultObservable
-            .map {
-                CurrencyConversionResult(value: $0)
-            }
-        return mappedConversionResultObservable
+    func fetchConversionRate(_ target: String) -> Observable<Double> {
+        let conversionRateObservable = dataSource.fetchConversionRate(target)
+//        let mappedConversionResultObservable = conversionResultObservable
+//            .map {
+//                CurrencyConversionResult(value: $0)
+//            }
+        return conversionRateObservable
     }
 }

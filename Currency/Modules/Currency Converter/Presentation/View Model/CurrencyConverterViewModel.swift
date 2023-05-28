@@ -16,12 +16,14 @@ class CurrencyConverterViewModel {
     // MARK: - View State
     private(set) var viewState: PublishRelay<ViewState> = .init()
     // MARK: - Inputs
-    private(set) var selectedBaseCurrency: BehaviorRelay<String> = .init(value: "")
-    private(set) var selectedTargetCurrency: BehaviorRelay<String> = .init(value: "")
-    private(set) var baseCurrencyAmount: BehaviorRelay<Double> = .init(value: 1.0)
+    private(set) var selectedBaseCurrency: BehaviorRelay<String> = .init(value: "EUR")
+    private(set) var selectedTargetCurrency: BehaviorRelay<String> = .init(value: "USD")
+    private(set) var baseCurrencyAmountInput: BehaviorRelay<Double> = .init(value: 1.0)
+    private(set) var targetCurrencyAmountInput: BehaviorRelay<Double> = .init(value: 0.0)
     // MARK: - Outputs
     private(set) var currencySymbols: Driver<[String]>!
-    private(set) var targetCurrencyAmount: Driver<Double>!
+    private(set) var baseCurrencyAmountOutput: Driver<Double>!
+    private(set) var targetCurrencyAmountOutput: Driver<Double>!
     private(set) var error: Driver<NetworkError>!
     init(fetchSymbolsUseCase: FetchSymbolsUseCase, fetchConversionResultUseCase: FetchConversionResultUseCase) {
         self.fetchSymbolsUseCase = fetchSymbolsUseCase
@@ -38,7 +40,7 @@ class CurrencyConverterViewModel {
     }
     private func setupViewStateBindings() {
         let currencySymbolsObservable = viewState
-            .filter( { ![.idle, .loading(loadType: .normal), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
+            .filter( { ![.idle, .loading(loadType: .baseDriven), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
             .flatMapLatest { _ in
                 let conversionResultObservable = self.fetchSymbolsUseCase.execute()
                     .map {
@@ -48,12 +50,27 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
-        let conversionResultObservable = viewState
-            .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
+        let baseConversionResultObservable = viewState
+            .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .targetDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
             .flatMapLatest { _ in
                 let conversionResultObservable = self.fetchConversionResultUseCase.execute(self.selectedBaseCurrency.value,
                                                                                            self.selectedTargetCurrency.value,
-                                                                                           self.baseCurrencyAmount.value)
+                                                                                           self.baseCurrencyAmountInput.value)
+                    .map {
+                        $0.value
+                    }
+                    .materialize()
+                return conversionResultObservable
+            }
+            .share()
+        let targetConversionResultObservable = viewState
+            .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .baseDriven), .loading(loadType: .refresh), .loading(loadType: .paginate), .error].contains($0) })
+            .flatMapLatest { _ in
+                let conversionResultObservable = self.fetchConversionResultUseCase.execute(self.selectedTargetCurrency.value,
+                                                                                           self.selectedBaseCurrency.value,
+                                                                                           self.targetCurrencyAmountInput.value)
                     .map {
                         $0.value
                     }
@@ -62,12 +79,16 @@ class CurrencyConverterViewModel {
             }
             .share()
         let mergedOutputsObservable = Observable.merge([currencySymbolsObservable.map { $0 as AnyObject },
-                                                        conversionResultObservable.map { $0 as AnyObject }])
+                                                        baseConversionResultObservable.map { $0 as AnyObject },
+                                                        targetConversionResultObservable.map { $0 as AnyObject }])
         currencySymbols = currencySymbolsObservable
             .compactMap { $0.element }
             .asDriver(onErrorJustReturn: [])
-        targetCurrencyAmount = conversionResultObservable
-            .compactMap { $0.element }
+        baseCurrencyAmountOutput = targetConversionResultObservable
+            .compactMap({ $0.element })
+            .asDriver(onErrorJustReturn: 0.0)
+        targetCurrencyAmountOutput = baseConversionResultObservable
+            .compactMap({ $0.element })
             .asDriver(onErrorJustReturn: 0.0)
         error = mergedOutputsObservable
             .compactMap { $0.error as? NetworkError }
@@ -76,17 +97,22 @@ class CurrencyConverterViewModel {
     private func setupInputBindings() {
         selectedBaseCurrency
             .asObservable()
-            .map({ _ in .loading(loadType: .normal) })
+            .map({ _ in .loading(loadType: .baseDriven) })
             .bind(to: viewState)
             .disposed(by: disposeBag)
         selectedTargetCurrency
             .asObservable()
-            .map({ _ in .loading(loadType: .normal) })
+            .map({ _ in .loading(loadType: .baseDriven) })
             .bind(to: viewState)
             .disposed(by: disposeBag)
-        baseCurrencyAmount
+        baseCurrencyAmountInput
             .asObservable()
-            .map({ _ in .loading(loadType: .normal) })
+            .map({ _ in .loading(loadType: .baseDriven) })
+            .bind(to: viewState)
+            .disposed(by: disposeBag)
+        targetCurrencyAmountInput
+            .asObservable()
+            .map({ _ in .loading(loadType: .targetDriven) })
             .bind(to: viewState)
             .disposed(by: disposeBag)
     }
@@ -96,7 +122,12 @@ class CurrencyConverterViewModel {
             .map({ _ in .idle })
             .bind(to: viewState)
             .disposed(by: disposeBag)
-        targetCurrencyAmount
+        baseCurrencyAmountOutput
+            .asObservable()
+            .map({ _ in .idle })
+            .bind(to: viewState)
+            .disposed(by: disposeBag)
+        targetCurrencyAmountOutput
             .asObservable()
             .map({ _ in .idle })
             .bind(to: viewState)

@@ -9,5 +9,5 @@ import RxSwift
 
 protocol CurrencyConverterRemoteDataSource {
     func fetchSymbols() -> Observable<[String]>
-    func fetchConversionResult(_ base: String, _ target: String, _ amount: Double) -> Observable<Double>
+    func fetchConversionRate(_ target: String) -> Observable<Double>
 }

@@ -14,5 +14,8 @@ class DefaultFetchSymbolsUseCase: FetchSymbolsUseCase {
     }
     func execute() -> Observable<CurrencySymbols> {
         repository.fetchSymbols()
+            .map {
+                .init(value: $0)
+            }
     }
 }
