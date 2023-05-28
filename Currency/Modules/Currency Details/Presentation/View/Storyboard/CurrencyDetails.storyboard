@@ -12,7 +12,7 @@
         <!--Currency Details View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="CurrencyDetailsViewController" customModule="Currency" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrencyDetailsViewController" id="Y6W-OH-hqX" customClass="CurrencyDetailsViewController" customModule="Currency" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="conversionHistoryTableView" destination="bD7-Yw-xks" id="BlV-71-2v0"/>
+                        <outlet property="rateHistoryTableView" destination="bD7-Yw-xks" id="BlV-71-2v0"/>
                         <outlet property="view" destination="bD7-Yw-xks" id="SxP-KD-hIa"/>
                     </connections>
                 </viewController>

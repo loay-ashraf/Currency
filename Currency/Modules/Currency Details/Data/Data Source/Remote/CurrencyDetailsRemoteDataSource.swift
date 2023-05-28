@@ -8,5 +8,5 @@
 import RxSwift
 
 protocol CurrencyDetailsRemoteDataSource {
-    func fetchRateHistory(_ base: String, _ target: String) -> Observable<CurrencyRateHistoryJSONModel>
+    func fetchRateHistory(_ date: String, _ target: String) -> Observable<CurrencyRateHistoryJSONModel>
 }

@@ -1,12 +1,13 @@
 //
-//  CurrencyRateHistory.swift
+//  CurrencyRateHistoryRecord.swift
 //  Currency
 //
 //  Created by Loay Ashraf on 28/05/2023.
 //
 
-struct CurrencyRateHistory {
+struct CurrencyRateHistoryRecord {
+    let date: String
     let base: String
     let target: String
-    let values: [Double]
+    let value: Double
 }

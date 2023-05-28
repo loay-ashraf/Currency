@@ -12,8 +12,8 @@ class DefaultCurrencyDetailsRemoteDataSource: CurrencyDetailsRemoteDataSource {
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
-    func fetchRateHistory(_ base: String, _ target: String) -> Observable<CurrencyRateHistoryJSONModel> {
-        let requestRouter = CurrencyDetailsRouter.rate(date: base, target: target)
+    func fetchRateHistory(_ date: String, _ target: String) -> Observable<CurrencyRateHistoryJSONModel> {
+        let requestRouter = CurrencyDetailsRouter.rate(date: date, target: target)
         return networkManager.request(using: requestRouter)
     }
 }

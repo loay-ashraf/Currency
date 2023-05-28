@@ -12,10 +12,10 @@ class DefaultCurrencyDetailsRepository: CurrencyDetailsRepository {
     init(dataSource: CurrencyDetailsRemoteDataSource) {
         self.dataSource = dataSource
     }
-    func fectchRateHistory(_ base: String, _ target: String) -> Observable<[Double]> {
-        dataSource.fetchRateHistory(base, target)
-            .map {
-                Array($0.rates.values)
+    func fectchRateHistory(_ date: String, _ target: String) -> Observable<Double> {
+        dataSource.fetchRateHistory(date, target)
+            .compactMap {
+                $0.rates.values.first
             }
     }
 }

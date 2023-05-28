@@ -87,6 +87,21 @@ class CurrencyConverterViewController: UIViewController {
                 self.swapCurrenciesAction()
             })
             .disposed(by: disposeBag)
+        currencyDetailsButton.rx.tap
+            .bind(onNext: {
+                let viewModel: CurrencyDetailsViewModel = {
+                    let dataSource = DefaultCurrencyDetailsRemoteDataSource(networkManager: .shared)
+                    let repository = DefaultCurrencyDetailsRepository(dataSource: dataSource)
+                    let fetchRateHistoryUseCase = DefaultFetchRateHistoryUseCase(repository: repository)
+                    let viewModel = CurrencyDetailsViewModel(baseCurrency: self.viewModel.selectedBaseCurrency.value, targetCurrency: self.viewModel.selectedTargetCurrency.value, fetchRateHistoryUseCase: fetchRateHistoryUseCase)
+                    return viewModel
+                }()
+                let viewController = UIStoryboard(name: "CurrencyDetails", bundle: nil).instantiateViewController(withIdentifier: String(describing: CurrencyDetailsViewController.self)) as! CurrencyDetailsViewController
+                viewController.viewModel = viewModel
+                viewController.modalPresentationStyle = .pageSheet
+                self.present(viewController, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     private func setupOutputBindings() {
         viewModel.viewState

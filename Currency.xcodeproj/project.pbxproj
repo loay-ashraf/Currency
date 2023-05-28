@@ -62,8 +62,8 @@
 		C650C9CF2A238DCD00A33C36 /* CurrencyDetailsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9CE2A238DCD00A33C36 /* CurrencyDetailsViewState.swift */; };
 		C650C9D12A238DFF00A33C36 /* CurrencyDetailsViewLoadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9D02A238DFF00A33C36 /* CurrencyDetailsViewLoadType.swift */; };
 		C650C9DB2A23914000A33C36 /* CurrencyRateHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9DA2A23914000A33C36 /* CurrencyRateHistory.swift */; };
-		C650C9DF2A2391DB00A33C36 /* FetchHistoricalRatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9DE2A2391DB00A33C36 /* FetchHistoricalRatesUseCase.swift */; };
-		C650C9E12A23926400A33C36 /* DefaultFetchRateHistoryUseCaseUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCaseUse.swift */; };
+		C650C9DF2A2391DB00A33C36 /* FetchRateHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9DE2A2391DB00A33C36 /* FetchRateHistoryUseCase.swift */; };
+		C650C9E12A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift */; };
 		C650C9E32A2392A000A33C36 /* CurrencyDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9E22A2392A000A33C36 /* CurrencyDetailsRepository.swift */; };
 		C650C9E52A23939100A33C36 /* DefaultCurrencyDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9E42A23939100A33C36 /* DefaultCurrencyDetailsRepository.swift */; };
 		C650C9E72A23944C00A33C36 /* CurrencyDetailsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9E62A23944C00A33C36 /* CurrencyDetailsRemoteDataSource.swift */; };
@@ -150,8 +150,8 @@
 		C650C9CE2A238DCD00A33C36 /* CurrencyDetailsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsViewState.swift; sourceTree = "<group>"; };
 		C650C9D02A238DFF00A33C36 /* CurrencyDetailsViewLoadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsViewLoadType.swift; sourceTree = "<group>"; };
 		C650C9DA2A23914000A33C36 /* CurrencyRateHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateHistory.swift; sourceTree = "<group>"; };
-		C650C9DE2A2391DB00A33C36 /* FetchHistoricalRatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHistoricalRatesUseCase.swift; sourceTree = "<group>"; };
-		C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCaseUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchRateHistoryUseCaseUse.swift; sourceTree = "<group>"; };
+		C650C9DE2A2391DB00A33C36 /* FetchRateHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRateHistoryUseCase.swift; sourceTree = "<group>"; };
+		C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchRateHistoryUseCase.swift; sourceTree = "<group>"; };
 		C650C9E22A2392A000A33C36 /* CurrencyDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsRepository.swift; sourceTree = "<group>"; };
 		C650C9E42A23939100A33C36 /* DefaultCurrencyDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyDetailsRepository.swift; sourceTree = "<group>"; };
 		C650C9E62A23944C00A33C36 /* CurrencyDetailsRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -732,7 +732,7 @@
 		C650C9DC2A2391B200A33C36 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				C650C9DE2A2391DB00A33C36 /* FetchHistoricalRatesUseCase.swift */,
+				C650C9DE2A2391DB00A33C36 /* FetchRateHistoryUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -740,7 +740,7 @@
 		C650C9DD2A2391BB00A33C36 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCaseUse.swift */,
+				C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -878,11 +878,11 @@
 				C62278A92A224BD2008A71DC /* CurrencyConverterRepository.swift in Sources */,
 				C622789B2A2245E3008A71DC /* CurrencyConversionResult.swift in Sources */,
 				C62278DE2A228F7A008A71DC /* CurrencySymbolsPresentationModel.swift in Sources */,
-				C650C9E12A23926400A33C36 /* DefaultFetchRateHistoryUseCaseUse.swift in Sources */,
+				C650C9E12A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift in Sources */,
 				C62278A12A2246A7008A71DC /* FetchConversionResultUseCase.swift in Sources */,
 				C62278CF2A227F3F008A71DC /* NetworkClientError.swift in Sources */,
 				C62278D52A227F87008A71DC /* HTTPStatusCode.swift in Sources */,
-				C650C9DF2A2391DB00A33C36 /* FetchHistoricalRatesUseCase.swift in Sources */,
+				C650C9DF2A2391DB00A33C36 /* FetchRateHistoryUseCase.swift in Sources */,
 				C62278D12A227F3F008A71DC /* NetworkAPIError.swift in Sources */,
 				C63EF79C2A221EAA00A482EB /* CurrencyConverterViewController.swift in Sources */,
 				C62278E02A229005008A71DC /* CurrencyConversionResultPresentationModel.swift in Sources */,
