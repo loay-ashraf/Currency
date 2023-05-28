@@ -33,6 +33,14 @@ class CurrencyConverterViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupUI()
+        setupUIBindings()
+        startLoading()
+    }
+    private func setupUIBindings() {
+        setupInputBindings()
+        setupOutputBindings()
+    }
+    private func setupOutputBindings() {
         viewModel.currencySymbols
             .do(afterNext: { symbols in
                 let defaultToCurrency = "EUR"
@@ -59,18 +67,6 @@ class CurrencyConverterViewController: UIViewController {
         viewModel.selectedTargetCurrency
             .bind(to: toCurrencyButton.rx.title())
             .disposed(by: disposeBag)
-        fromCurrencyPickerView.rx.modelSelected(String.self)
-            .bind(onNext: { models in
-                self.fromCurrencyButton.setTitle(models[0], for: .normal)
-                self.viewModel.selectedBaseCurrency.accept(models[0])
-            })
-            .disposed(by: disposeBag)
-        toCurrencyPickerView.rx.modelSelected(String.self)
-            .bind(onNext: { models in
-                self.toCurrencyButton.setTitle(models[0], for: .normal)
-                self.viewModel.selectedTargetCurrency.accept(models[0])
-            })
-            .disposed(by: disposeBag)
         viewModel.baseCurrencyAmountOutput
             .map({ "\($0)" })
             .drive(fromCurrencyAmountTextField.rx.text)
@@ -79,6 +75,8 @@ class CurrencyConverterViewController: UIViewController {
             .map({ "\($0)" })
             .drive(toCurrencyAmountTextField.rx.text)
             .disposed(by: disposeBag)
+    }
+    private func setupInputBindings() {
         fromCurrencyButton.rx.tap
             .bind(onNext: {
                 self.toCurrencyPickerView.isHidden = true
@@ -91,12 +89,20 @@ class CurrencyConverterViewController: UIViewController {
                 self.toCurrencyPickerView.isHidden.toggle()
             })
             .disposed(by: disposeBag)
+        fromCurrencyPickerView.rx.modelSelected(String.self)
+            .compactMap({ $0.first })
+            .bind(to: viewModel.selectedBaseCurrency)
+            .disposed(by: disposeBag)
+        toCurrencyPickerView.rx.modelSelected(String.self)
+            .compactMap({ $0.first })
+            .bind(to: viewModel.selectedTargetCurrency)
+            .disposed(by: disposeBag)
         fromCurrencyAmountTextField.rx
             .controlEvent(.editingChanged)
             .withLatestFrom(fromCurrencyAmountTextField.rx.text.orEmpty)
             .map({ $0.isEmpty ? "0.0" : $0 })
             .distinctUntilChanged()
-            .debounce(.milliseconds(100), scheduler: MainScheduler())
+            .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
             .compactMap({ Double($0) })
             .do(onNext: { print($0) })
             .bind(to: viewModel.baseCurrencyAmountInput)
@@ -106,32 +112,37 @@ class CurrencyConverterViewController: UIViewController {
             .withLatestFrom(toCurrencyAmountTextField.rx.text.orEmpty)
             .map({ $0.isEmpty ? "0.0" : $0 })
             .distinctUntilChanged()
-            .debounce(.milliseconds(100), scheduler: MainScheduler())
+            .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
             .compactMap({ Double($0) })
             .do(onNext: { print($0) })
             .bind(to: viewModel.targetCurrencyAmountInput)
             .disposed(by: disposeBag)
         swapCurrencyButton.rx.tap
-                .bind(onNext: {
-                    let baseCurrency = self.viewModel.selectedBaseCurrency.value
-                    let targetCurrency = self.viewModel.selectedTargetCurrency.value
-                    let baseCurrencyIndex = self.fromCurrencyPickerView.selectedRow(inComponent: 0)
-                    let targetCurrencyIndex = self.toCurrencyPickerView.selectedRow(inComponent: 0)
-                    let baseCurrencyAmount = self.fromCurrencyAmountTextField.text ?? "0.0"
-                    let targetCurrencyAmount = self.toCurrencyAmountTextField.text ?? "0.0"
-                    self.viewModel.selectedBaseCurrency.accept(targetCurrency)
-                    self.viewModel.selectedTargetCurrency.accept(baseCurrency)
-                    self.viewModel.baseCurrencyAmountInput.accept(Double(targetCurrencyAmount) ?? 0.0)
-                    self.viewModel.targetCurrencyAmountInput.accept(Double(baseCurrencyAmount) ?? 0.0)
-                    self.fromCurrencyButton.setTitle(targetCurrency, for: .normal)
-                    self.toCurrencyButton.setTitle(baseCurrency, for: .normal)
-                    self.fromCurrencyAmountTextField.text = targetCurrencyAmount
-                    self.toCurrencyAmountTextField.text = baseCurrencyAmount
-                    self.fromCurrencyPickerView.selectRow(targetCurrencyIndex, inComponent: 0, animated: false)
-                    self.toCurrencyPickerView.selectRow(baseCurrencyIndex, inComponent: 0, animated: false)
-                })
-                .disposed(by: disposeBag)
+            .bind(onNext: {
+                self.swapCurrenciesAction()
+            })
+            .disposed(by: disposeBag)
+    }
+    private func startLoading() {
         viewModel.viewState.accept(.loading(loadType: .initial))
+    }
+    private func swapCurrenciesAction() {
+        let baseCurrency = viewModel.selectedBaseCurrency.value
+        let targetCurrency = viewModel.selectedTargetCurrency.value
+        let baseCurrencyIndex = fromCurrencyPickerView.selectedRow(inComponent: 0)
+        let targetCurrencyIndex = toCurrencyPickerView.selectedRow(inComponent: 0)
+        let baseCurrencyAmount = fromCurrencyAmountTextField.text ?? "0.0"
+        let targetCurrencyAmount = toCurrencyAmountTextField.text ?? "0.0"
+        viewModel.selectedBaseCurrency.accept(targetCurrency)
+        viewModel.selectedTargetCurrency.accept(baseCurrency)
+        viewModel.baseCurrencyAmountInput.accept(Double(targetCurrencyAmount) ?? 0.0)
+        viewModel.targetCurrencyAmountInput.accept(Double(baseCurrencyAmount) ?? 0.0)
+        fromCurrencyButton.setTitle(targetCurrency, for: .normal)
+        toCurrencyButton.setTitle(baseCurrency, for: .normal)
+        fromCurrencyAmountTextField.text = targetCurrencyAmount
+        toCurrencyAmountTextField.text = baseCurrencyAmount
+        fromCurrencyPickerView.selectRow(targetCurrencyIndex, inComponent: 0, animated: false)
+        toCurrencyPickerView.selectRow(baseCurrencyIndex, inComponent: 0, animated: false)
     }
     private func setupUI() {
         currencyConverterStackView.setRadiusAndShadow()
