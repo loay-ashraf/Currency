@@ -91,10 +91,10 @@ class CurrencyConverterViewModel {
                 return conversionResultObservable
             }
             .share()
-        let mergedOutputsObservable = Observable.merge([currencySymbolsObservable.map { $0 as AnyObject },
-                                                        initialBaseConversionResultObservable.map { $0 as AnyObject },
-                                                        baseConversionResultObservable.map { $0 as AnyObject },
-                                                        targetConversionResultObservable.map { $0 as AnyObject }])
+        let mergedErrorsObservable = Observable.merge([currencySymbolsObservable.compactMap { $0.error as? NetworkError },
+                                                        initialBaseConversionResultObservable.compactMap { $0.error as? NetworkError },
+                                                        baseConversionResultObservable.compactMap { $0.error as? NetworkError },
+                                                        targetConversionResultObservable.compactMap { $0.error as? NetworkError }])
         currencySymbols = currencySymbolsObservable
             .compactMap { $0.element }
             .asDriver(onErrorJustReturn: [])
@@ -104,8 +104,7 @@ class CurrencyConverterViewModel {
         targetCurrencyAmountOutput = Observable.merge([initialBaseConversionResultObservable, baseConversionResultObservable])
             .compactMap({ $0.element })
             .asDriver(onErrorJustReturn: 0.0)
-        error = mergedOutputsObservable
-            .compactMap { $0.error as? NetworkError }
+        error = mergedErrorsObservable
             .asDriver(onErrorJustReturn: NetworkError.client(.transport(NSError(domain: "", code: 1, userInfo: nil))))
     }
     private func setupInputBindings() {

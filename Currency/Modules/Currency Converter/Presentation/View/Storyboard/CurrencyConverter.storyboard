@@ -90,6 +90,9 @@
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oo-CO-lKQ">
                                 <rect key="frame" x="0.0" y="577" width="393" height="216"/>
                             </pickerView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="x6J-be-S3Q">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -98,7 +101,9 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0AX-9v-joV" secondAttribute="trailing" constant="50" id="2MP-4o-giZ"/>
                             <constraint firstItem="2oo-CO-lKQ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="4mx-ws-9Ha"/>
                             <constraint firstItem="2oo-CO-lKQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5bH-Yc-Z7o"/>
+                            <constraint firstItem="x6J-be-S3Q" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6pi-ul-fSD"/>
                             <constraint firstItem="0AX-9v-joV" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="7oA-oR-5lB"/>
+                            <constraint firstItem="x6J-be-S3Q" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="JAK-eC-TJk"/>
                             <constraint firstItem="16X-xp-dn1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="V1A-Qr-V22"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="16X-xp-dn1" secondAttribute="bottom" constant="25" id="V1G-fu-08g"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fh3-l6-wxf" secondAttribute="trailing" constant="50" id="Za8-uC-jcw"/>
@@ -114,6 +119,7 @@
                         <outlet property="fromCurrencyAmountTextField" destination="jYp-DO-gZ0" id="vMC-7w-HZq"/>
                         <outlet property="fromCurrencyButton" destination="IN5-v2-z5B" id="BKf-iQ-Pl5"/>
                         <outlet property="fromCurrencyPickerView" destination="16X-xp-dn1" id="C49-mR-0oh"/>
+                        <outlet property="loadingIndicator" destination="x6J-be-S3Q" id="013-uc-Vg7"/>
                         <outlet property="swapCurrencyButton" destination="xXm-YP-8bx" id="rBB-P3-JoT"/>
                         <outlet property="toCurrencyAmountTextField" destination="K8h-OY-93V" id="GXw-6i-sM8"/>
                         <outlet property="toCurrencyButton" destination="pXy-j2-0TM" id="ukf-GK-a8q"/>

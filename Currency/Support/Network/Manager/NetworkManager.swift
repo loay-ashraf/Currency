@@ -16,6 +16,9 @@ class NetworkManager {
         let request = router.asURLRequest()
         dump(request)
         let responseObservable = URLSession.shared.rx.response(request: request)
+            .catch {
+                throw NetworkError.client(.transport($0))
+            }
             .map { response, data in
                 guard let networkError = NetworkError(response) else {
                     let jsonDecoder = JSONDecoder()

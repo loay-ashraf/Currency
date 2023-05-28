@@ -28,6 +28,7 @@ class CurrencyConverterViewController: UIViewController {
     @IBOutlet weak var toCurrencyPickerView: UIPickerView!
     @IBOutlet weak var fromCurrencyAmountTextField: UITextField!
     @IBOutlet weak var toCurrencyAmountTextField: UITextField!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,42 +40,6 @@ class CurrencyConverterViewController: UIViewController {
     private func setupUIBindings() {
         setupInputBindings()
         setupOutputBindings()
-    }
-    private func setupOutputBindings() {
-        viewModel.currencySymbols
-            .do(afterNext: { symbols in
-                let defaultToCurrency = "EUR"
-                guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
-                self.fromCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
-            })
-            .drive(fromCurrencyPickerView.rx.itemTitles) { row, element in
-                return element
-            }
-            .disposed(by: disposeBag)
-        viewModel.currencySymbols
-            .do(afterNext: { symbols in
-                let defaultToCurrency = "USD"
-                guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
-                self.toCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
-            })
-            .drive(toCurrencyPickerView.rx.itemTitles) { row, element in
-                return element
-            }
-            .disposed(by: disposeBag)
-        viewModel.selectedBaseCurrency
-            .bind(to: fromCurrencyButton.rx.title())
-            .disposed(by: disposeBag)
-        viewModel.selectedTargetCurrency
-            .bind(to: toCurrencyButton.rx.title())
-            .disposed(by: disposeBag)
-        viewModel.baseCurrencyAmountOutput
-            .map({ "\($0)" })
-            .drive(fromCurrencyAmountTextField.rx.text)
-            .disposed(by: disposeBag)
-        viewModel.targetCurrencyAmountOutput
-            .map({ "\($0)" })
-            .drive(toCurrencyAmountTextField.rx.text)
-            .disposed(by: disposeBag)
     }
     private func setupInputBindings() {
         fromCurrencyButton.rx.tap
@@ -123,6 +88,53 @@ class CurrencyConverterViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    private func setupOutputBindings() {
+        viewModel.viewState
+            .map({ [.loading(loadType: .initial), .loading(loadType: .baseDriven), .loading(loadType: .targetDriven)].contains($0) })
+            .bind(to: loadingIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        viewModel.error
+            .drive(onNext: {
+                let alertController = UIAlertController(title: "Error", message: "An error occured.\n\($0.localizedDescription)", preferredStyle: .alert)
+                alertController.addAction(.init(title: "Ok", style: .default))
+                self.present(alertController, animated: true)
+            })
+            .disposed(by: disposeBag)
+        viewModel.currencySymbols
+            .do(afterNext: { symbols in
+                let defaultToCurrency = "EUR"
+                guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
+                self.fromCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
+            })
+            .drive(fromCurrencyPickerView.rx.itemTitles) { row, element in
+                return element
+            }
+            .disposed(by: disposeBag)
+        viewModel.currencySymbols
+            .do(afterNext: { symbols in
+                let defaultToCurrency = "USD"
+                guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
+                self.toCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
+            })
+            .drive(toCurrencyPickerView.rx.itemTitles) { row, element in
+                return element
+            }
+            .disposed(by: disposeBag)
+        viewModel.selectedBaseCurrency
+            .bind(to: fromCurrencyButton.rx.title())
+            .disposed(by: disposeBag)
+        viewModel.selectedTargetCurrency
+            .bind(to: toCurrencyButton.rx.title())
+            .disposed(by: disposeBag)
+        viewModel.baseCurrencyAmountOutput
+            .map({ "\($0)" })
+            .drive(fromCurrencyAmountTextField.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.targetCurrencyAmountOutput
+            .map({ "\($0)" })
+            .drive(toCurrencyAmountTextField.rx.text)
+            .disposed(by: disposeBag)
+    }
     private func startLoading() {
         viewModel.viewState.accept(.loading(loadType: .initial))
     }
@@ -156,6 +168,9 @@ class CurrencyConverterViewController: UIViewController {
         currencyDetailsButton.backgroundColor = .black
         currencyDetailsButton.tintColor = .white
         fromCurrencyAmountTextField.text = "1.0"
+        setupKeyboardUI()
+    }
+    private func setupKeyboardUI() {
         let bar = UIToolbar()
         let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: nil)
         done.rx.tap
