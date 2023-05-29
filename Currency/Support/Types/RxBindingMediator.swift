@@ -25,8 +25,8 @@ class RxBindingMediator<T>: ObservableObject {
     // MARK: - Instance Methods
     private func setupInOutBinding() {
         input
-            .subscribe(onNext: {
-                self.output = $0
+            .subscribe(onNext: { [weak self] in
+                self?.output = $0
             })
             .disposed(by: disposeBag)
     }
