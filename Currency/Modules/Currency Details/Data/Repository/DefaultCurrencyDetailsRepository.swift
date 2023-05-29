@@ -12,6 +12,9 @@ class DefaultCurrencyDetailsRepository: CurrencyDetailsRepository {
     init(dataSource: CurrencyDetailsRemoteDataSource) {
         self.dataSource = dataSource
     }
+    func fetchRate(_ targets: [String]) -> Observable<[String: Double]> {
+        dataSource.fetchRate(targets)
+    }
     func fectchRateHistory(_ date: String, _ target: String) -> Observable<Double> {
         dataSource.fetchRateHistory(date, target)
     }

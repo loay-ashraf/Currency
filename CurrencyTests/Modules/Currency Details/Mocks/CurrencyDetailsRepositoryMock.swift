@@ -2,7 +2,7 @@
 //  CurrencyDetailsRepositoryMock.swift
 //  CurrencyTests
 //
-//  Created by Loay Ashraf on 27/02/2023.
+//  Created by Loay Ashraf on 29/05/2023.
 //
 import XCTest
 import RxSwift
@@ -10,9 +10,10 @@ import RxSwift
 
 class CurrencyDetailsRepositoryMock: CurrencyDetailsRepository {
     var fetchRateHistoryCalled = false
+    var fetchRatesCalled = false
     var rateHistoryResult: [Double]?
+    var ratesResult: [String: Double]?
     var timesfetchHistoryRateCalled: Int = 0
-    
     func fectchRateHistory(_ date: String, _ target: String) -> Observable<Double> {
         fetchRateHistoryCalled = true
         timesfetchHistoryRateCalled += 1
@@ -43,6 +44,16 @@ class CurrencyDetailsRepositoryMock: CurrencyDetailsRepository {
             }
         default:
             return Observable.empty()
+        }
+    }
+    func fetchRate(_ targets: [String]) -> Observable<[String: Double]> {
+        fetchRatesCalled = true
+        return Observable.create { subscriber in
+            let rates = CurrencyDetailsStubs.rates ?? [:]
+            self.ratesResult = rates
+            subscriber.onNext(rates)
+            subscriber.onCompleted()
+            return Disposables.create()
         }
     }
 }

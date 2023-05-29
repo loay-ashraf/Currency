@@ -8,7 +8,8 @@
 import Foundation
 
 enum CurrencyDetailsRouter: NetworkRouter {
-    case rate(date: String, target: String)
+    case rate(targets: [String])
+    case rateHistory(date: String, target: String)
     var scheme: HTTPScheme {
         .http
     }
@@ -20,7 +21,9 @@ enum CurrencyDetailsRouter: NetworkRouter {
     }
     var path: String {
         switch self {
-        case .rate(let date, _):
+        case .rate:
+            return "api/latest"
+        case .rateHistory(let date, _):
             return "api/\(date)"
         }
     }
@@ -29,12 +32,14 @@ enum CurrencyDetailsRouter: NetworkRouter {
     }
     var parameters: [String : String]? {
         var parameters: [String: String] = ["access_key": "7d80b5334c7a102a84071ac77c135d63"]
+        parameters["base"] = "EUR"
         switch self {
-        case .rate(_, let target):
-            parameters["base"] = "EUR"
+        case .rate(let targets):
+            parameters["symbols"] = targets.joined(separator: ",")
+        case .rateHistory(_, let target):
             parameters["symbols"] = target
-            return parameters
         }
+        return parameters
     }
     var body: [String : Any]? {
         nil
