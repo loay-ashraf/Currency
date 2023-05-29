@@ -26,9 +26,9 @@ class DefaultFetchRateHistoryUseCase: FetchRateHistoryUseCase {
     /// - Returns: `Observable<[CurrencyRateHistoryRecord]>` sequence that emits conversion rate history or an error.
     func execute(_ base: String, _ target: String) -> Observable<[CurrencyRateHistoryRecord]> {
         let dates = computeThreeDaysDates()
-        if base == "EUR" {
+        if base == Constants.defaultBaseCurrency {
             return fetchDefaultBaseCurrencyRate(target, dates)
-        } else if target == "EUR" {
+        } else if target == Constants.defaultBaseCurrency {
             return fetchDefaultTargetCurrencyRate(base, dates)
         } else {
             return fetchCurrencyRate(base, target, dates)
@@ -64,7 +64,7 @@ class DefaultFetchRateHistoryUseCase: FetchRateHistoryUseCase {
         for date in dates {
             let observable = repository.fectchRateHistory(date, target)
                 .map({
-                    CurrencyRateHistoryRecord.init(date: date, base: "EUR", target: target, value: $0)
+                    CurrencyRateHistoryRecord.init(date: date, base: Constants.defaultBaseCurrency, target: target, value: $0)
                 })
             observables.append(observable)
         }
@@ -83,7 +83,7 @@ class DefaultFetchRateHistoryUseCase: FetchRateHistoryUseCase {
         for date in dates {
             let observable = repository.fectchRateHistory(date, base)
                 .map({
-                    CurrencyRateHistoryRecord.init(date: date, base: base, target: "EUR", value: 1 / $0)
+                    CurrencyRateHistoryRecord.init(date: date, base: base, target: Constants.defaultBaseCurrency, value: 1 / $0)
                 })
             observables.append(observable)
         }

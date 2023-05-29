@@ -163,7 +163,7 @@ class CurrencyConverterViewController: UIViewController {
         viewModel.currencySymbols
         // After picker view is populated, we select default currency row.
             .do(afterNext: { [weak self] symbols in
-                let defaultFromCurrency = "EUR"
+                let defaultFromCurrency = Constants.defaultBaseCurrency
                 guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultFromCurrency) else { return }
                 self?.fromCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
             })
@@ -174,7 +174,7 @@ class CurrencyConverterViewController: UIViewController {
         viewModel.currencySymbols
         // After picker view is populated, we select default currency row.
             .do(afterNext: { [weak self] symbols in
-                let defaultToCurrency = "USD"
+                let defaultToCurrency = Constants.defaultTargetCurrency
                 guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
                 self?.toCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
             })

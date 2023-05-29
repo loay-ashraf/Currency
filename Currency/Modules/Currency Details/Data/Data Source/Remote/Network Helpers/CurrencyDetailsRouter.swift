@@ -32,7 +32,7 @@ enum CurrencyDetailsRouter: NetworkRouter {
     }
     var parameters: [String : String]? {
         var parameters: [String: String] = ["access_key": "7d80b5334c7a102a84071ac77c135d63"]
-        parameters["base"] = "EUR"
+        parameters["base"] = Constants.defaultBaseCurrency
         switch self {
         case .rate(let targets):
             parameters["symbols"] = targets.joined(separator: ",")

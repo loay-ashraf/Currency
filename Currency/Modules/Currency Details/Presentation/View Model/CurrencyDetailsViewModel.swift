@@ -13,18 +13,7 @@ class CurrencyDetailsViewModel {
     // MARK: - Private Properties
     private let baseCurrency: String
     private let targetCurrency: String
-    private let targetCurrencies: [String] = [
-        "USD",
-        "CAD",
-        "GBP",
-        "CHF",
-        "JPY",
-        "SAR",
-        "QAR",
-        "AED",
-        "KWD",
-        "EGP"
-    ]
+    private let targetCurrencies: [String] = Constants.popularTargetCurrencies
     private let fetchRateHistoryUseCase: FetchRateHistoryUseCase
     private let fetchRatesUseCase: FetchRatesUseCase
     private let disposeBag = DisposeBag()

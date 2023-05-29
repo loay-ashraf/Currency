@@ -36,7 +36,7 @@ enum CurrencyConverterRouter: NetworkRouter {
         case .symbols:
             return parameters
         case .rate(let target):
-            parameters["base"] = "EUR"
+            parameters["base"] = Constants.defaultBaseCurrency
             parameters["symbols"] = target
             return parameters
         }

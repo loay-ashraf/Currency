@@ -25,9 +25,9 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
     ///
     /// - Returns: `Observable<CurrencyConversionResult>` sequence that emits conversion result or an error.
     func execute(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
-        if base == "EUR" {
+        if base == Constants.defaultBaseCurrency {
             return convertDefaultBaseCurrency(target, amount)
-        } else if target == "EUR" {
+        } else if target == Constants.defaultBaseCurrency {
             return convertDefaultTargetCurrency(base, amount)
         } else {
             return convertCurrency(base, target, amount)

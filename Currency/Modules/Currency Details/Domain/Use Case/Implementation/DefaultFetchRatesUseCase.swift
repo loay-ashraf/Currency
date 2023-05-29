@@ -24,7 +24,7 @@ class DefaultFetchRatesUseCase: FetchRatesUseCase {
     ///
     /// - Returns: `Observable<[CurrencyRate]>` sequence that emits conversion rates or an error.
     func execute(_ base: String, _ targets: [String]) -> Observable<[CurrencyRate]> {
-        if base == "EUR" {
+        if base == Constants.defaultBaseCurrency {
             return fetchDefaultBaseCurrencyRate(targets)
         } else {
             return fetchBaseCurrencyRate(base, targets)
@@ -42,7 +42,7 @@ class DefaultFetchRatesUseCase: FetchRatesUseCase {
         return observable
             .map {
                 $0.reduce(into: [CurrencyRate]()) {
-                    $0.append(.init(base: "EUR", target: $1.key, value: $1.value))
+                    $0.append(.init(base: Constants.defaultBaseCurrency, target: $1.key, value: $1.value))
                 }
             }
     }

@@ -17,8 +17,8 @@ class CurrencyConverterViewModel {
     // MARK: - View State
     private(set) var viewState: PublishRelay<CurrencyConverterViewState> = .init()
     // MARK: - Inputs
-    private(set) var selectedBaseCurrency: BehaviorRelay<String> = .init(value: "EUR")
-    private(set) var selectedTargetCurrency: BehaviorRelay<String> = .init(value: "USD")
+    private(set) var selectedBaseCurrency: BehaviorRelay<String> = .init(value: Constants.defaultBaseCurrency)
+    private(set) var selectedTargetCurrency: BehaviorRelay<String> = .init(value: Constants.defaultTargetCurrency)
     private(set) var baseCurrencyAmountInput: BehaviorRelay<Double> = .init(value: 1.0)
     private(set) var targetCurrencyAmountInput: BehaviorRelay<Double> = .init(value: 0.0)
     // MARK: - Outputs

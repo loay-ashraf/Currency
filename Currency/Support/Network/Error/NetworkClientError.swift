@@ -1,6 +1,6 @@
 //
 //  NetworkClientError.swift
-//  RxNetworkKit
+//  Currency
 //
 //  Created by Loay Ashraf on 19/02/2023.
 //
