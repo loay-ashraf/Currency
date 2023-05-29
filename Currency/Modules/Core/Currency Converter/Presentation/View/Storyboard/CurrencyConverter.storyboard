@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="fh3-l6-wxf">
-                                <rect key="frame" x="50" y="161" width="293" height="165"/>
+                                <rect key="frame" x="50" y="211" width="293" height="165"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="0JP-n5-YQe">
                                         <rect key="frame" x="15" y="20" width="81.666666666666671" height="125"/>
@@ -41,7 +41,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-YP-8bx">
-                                        <rect key="frame" x="121.66666666666666" y="57.666666666666657" width="50" height="50"/>
+                                        <rect key="frame" x="121.66666666666666" y="57.666666666666686" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="dEh-VB-TtV"/>
                                             <constraint firstAttribute="height" constant="50" id="mpP-U5-d7V"/>
@@ -77,7 +77,7 @@
                                 <edgeInsets key="layoutMargins" top="20" left="15" bottom="20" right="15"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AX-9v-joV">
-                                <rect key="frame" x="50" y="401" width="293" height="50"/>
+                                <rect key="frame" x="50" y="451" width="293" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="KQ6-OH-b07"/>
                                 </constraints>
@@ -86,9 +86,17 @@
                             </button>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16X-xp-dn1">
                                 <rect key="frame" x="0.0" y="577" width="393" height="216"/>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </variation>
                             </pickerView>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oo-CO-lKQ">
                                 <rect key="frame" x="0.0" y="577" width="393" height="216"/>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </variation>
                             </pickerView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="x6J-be-S3Q">
                                 <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
@@ -98,21 +106,52 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2oo-CO-lKQ" secondAttribute="bottom" constant="25" id="225-Fb-cov"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0AX-9v-joV" secondAttribute="trailing" constant="50" id="2MP-4o-giZ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2oo-CO-lKQ" secondAttribute="bottom" constant="25" id="225-Fb-cov">
+                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0AX-9v-joV" secondAttribute="trailing" constant="50" id="2MP-4o-giZ">
+                                <variation key="heightClass=compact-widthClass=regular" constant="200"/>
+                            </constraint>
                             <constraint firstItem="2oo-CO-lKQ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="4mx-ws-9Ha"/>
                             <constraint firstItem="2oo-CO-lKQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5bH-Yc-Z7o"/>
                             <constraint firstItem="x6J-be-S3Q" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6pi-ul-fSD"/>
-                            <constraint firstItem="0AX-9v-joV" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="7oA-oR-5lB"/>
+                            <constraint firstItem="fh3-l6-wxf" firstAttribute="top" relation="lessThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" constant="152" id="ErM-xu-h4f">
+                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="x6J-be-S3Q" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="JAK-eC-TJk"/>
                             <constraint firstItem="16X-xp-dn1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="V1A-Qr-V22"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="16X-xp-dn1" secondAttribute="bottom" constant="25" id="V1G-fu-08g"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fh3-l6-wxf" secondAttribute="trailing" constant="50" id="Za8-uC-jcw"/>
-                            <constraint firstItem="0AX-9v-joV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="boR-Qv-jHK"/>
-                            <constraint firstItem="0AX-9v-joV" firstAttribute="top" secondItem="fh3-l6-wxf" secondAttribute="bottom" constant="75" id="btd-fQ-S95"/>
-                            <constraint firstItem="fh3-l6-wxf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="gsj-dG-HxR"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="16X-xp-dn1" secondAttribute="bottom" constant="25" id="V1G-fu-08g">
+                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="16X-xp-dn1" firstAttribute="top" secondItem="fh3-l6-wxf" secondAttribute="bottom" id="V5b-gN-InB"/>
+                            <constraint firstItem="0AX-9v-joV" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="50" id="Ydd-mU-Ded"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fh3-l6-wxf" secondAttribute="trailing" constant="50" id="Za8-uC-jcw">
+                                <variation key="heightClass=compact-widthClass=regular" constant="200"/>
+                            </constraint>
+                            <constraint firstItem="0AX-9v-joV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="boR-Qv-jHK">
+                                <variation key="heightClass=compact-widthClass=regular" constant="200"/>
+                            </constraint>
+                            <constraint firstItem="0AX-9v-joV" firstAttribute="top" secondItem="fh3-l6-wxf" secondAttribute="bottom" constant="75" id="btd-fQ-S95">
+                                <variation key="heightClass=compact-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="fh3-l6-wxf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="gsj-dG-HxR">
+                                <variation key="heightClass=compact-widthClass=regular" constant="200"/>
+                            </constraint>
                             <constraint firstItem="16X-xp-dn1" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="h3c-Hu-2LR"/>
+                            <constraint firstItem="2oo-CO-lKQ" firstAttribute="top" secondItem="fh3-l6-wxf" secondAttribute="bottom" id="ze1-Yp-JN6"/>
                         </constraints>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="ErM-xu-h4f"/>
+                                <exclude reference="Ydd-mU-Ded"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="V5b-gN-InB"/>
+                                <exclude reference="ze1-Yp-JN6"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="currencyConverterStackView" destination="fh3-l6-wxf" id="yM6-0Q-6X7"/>
