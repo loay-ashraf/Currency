@@ -16,7 +16,7 @@ class DefaultFetchSymbolsUseCase: FetchSymbolsUseCase {
     }
     // MARK: - Instance Methods
     
-    /// executes main task of the use case (converts base currency into target currency)
+    /// executes main task of the use case (fetches available currency symbols)
     /// 
     /// - Returns: `Observable<CurrencySymbols>` sequence that emits conversion result or an error.
     func execute() -> Observable<CurrencySymbols> {

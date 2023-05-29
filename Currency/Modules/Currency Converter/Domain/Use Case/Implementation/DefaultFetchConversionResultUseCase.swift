@@ -16,7 +16,7 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
     }
     // MARK: - Instance Methods
     
-    /// executes main task of the use case (fetches available currency symbols)
+    /// executes main task of the use case (converts base currency into target currency)
     /// 
     /// - Parameters:
     ///   - base: `String` base currency symbol
@@ -49,7 +49,7 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
             }
     }
     
-    /// converts base currency to target currency if target is the default "EUR"
+    /// converts base currency to base currency if target is the default "EUR"
     ///
     /// - Parameters:
     ///   - base: `String` base currency symbol
@@ -63,7 +63,6 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
                 return .init(value: result)
             }
     }
-    
     
     /// converts base currency to target currency
     ///

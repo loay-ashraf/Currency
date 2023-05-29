@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 class CurrencyDetailsViewModel {
+    // MARK: - Private Properties
     private let baseCurrency: String
     private let targetCurrency: String
     private let targetCurrencies: [String] = [
@@ -28,11 +29,12 @@ class CurrencyDetailsViewModel {
     private let fetchRatesUseCase: FetchRatesUseCase
     private let disposeBag = DisposeBag()
     // MARK: - View State
-    private(set) var viewState: PublishRelay<CurrencyConverterViewState> = .init()
+    private(set) var viewState: PublishRelay<CurrencyDetailsViewState> = .init()
     // MARK: - Outputs
     private(set) var rateHistory: Driver<[CurrencyRateHistoryRecord]>!
     private(set) var rates: Driver<[CurrencyRate]>!
     private(set) var error: Driver<NetworkError>!
+    // MARK: - Initializer
     init(baseCurrency: String, targetCurrency: String, fetchRateHistoryUseCase: FetchRateHistoryUseCase, fetchRatesUseCase: FetchRatesUseCase) {
         self.baseCurrency = baseCurrency
         self.targetCurrency = targetCurrency
@@ -40,15 +42,20 @@ class CurrencyDetailsViewModel {
         self.fetchRatesUseCase = fetchRatesUseCase
         setupBindings()
     }
+    // MARK: - Instance Methods
+    
+    /// sets up reacive bindings for view state and outputs
     private func setupBindings() {
         // Bind View State to Outputs
         setupViewStateBindings()
         // Bind Outputs to View State
         setupOutputBindings()
     }
+    
+    /// sets up reactive bindings for view state
     private func setupViewStateBindings() {
-        let rateHistoryObservable = setupRateHistoryObservable()
-        let ratesObservable = setupRatesObservable()
+        let rateHistoryObservable = makeRateHistoryObservable()
+        let ratesObservable = makeRatesObservable()
         let mergedErrorsObservable = Observable.merge([rateHistoryObservable.compactMap { $0.error as? NetworkError },
                                                        ratesObservable.compactMap { $0.error as? NetworkError }])
         rateHistory = rateHistoryObservable
@@ -60,28 +67,8 @@ class CurrencyDetailsViewModel {
         error = mergedErrorsObservable
             .asDriver(onErrorJustReturn: NetworkError.client(.transport(NSError(domain: "", code: 1, userInfo: nil))))
     }
-    private func setupRateHistoryObservable() -> Observable<Event<[CurrencyRateHistoryRecord]>> {
-        let rateHistoryObservable = viewState
-            .filter( { ![.idle, .loading(loadType: .paginate), .error].contains($0) })
-            .flatMapLatest { _ in
-                let rateHistoryObservable = self.fetchRateHistoryUseCase.execute(self.baseCurrency, self.targetCurrency)
-                    .materialize()
-                return rateHistoryObservable
-            }
-            .share()
-        return rateHistoryObservable
-    }
-    private func setupRatesObservable() -> Observable<Event<[CurrencyRate]>> {
-        let ratesObservable = viewState
-            .filter( { ![.idle, .loading(loadType: .paginate), .error].contains($0) })
-            .flatMapLatest { _ in
-                let ratesObservable = self.fetchRatesUseCase.execute(self.baseCurrency, self.targetCurrencies)
-                    .materialize()
-                return ratesObservable
-            }
-            .share()
-        return ratesObservable
-    }
+    
+    /// sets up reactive bindings for outputs
     private func setupOutputBindings() {
         rateHistory
             .asObservable()
@@ -98,5 +85,35 @@ class CurrencyDetailsViewModel {
             .map({ _ in .error })
             .bind(to: viewState)
             .disposed(by: disposeBag)
+    }
+    
+    /// makes observable sequence for rate history observable
+    ///
+    /// - Returns: `Observable<Event<[CurrencyRateHistoryRecord]>>` sequence that emits events for underlying request sequence.
+    private func makeRateHistoryObservable() -> Observable<Event<[CurrencyRateHistoryRecord]>> {
+        let rateHistoryObservable = viewState
+            .filter( { ![.idle, .error].contains($0) })
+            .flatMapLatest { _ in
+                let rateHistoryObservable = self.fetchRateHistoryUseCase.execute(self.baseCurrency, self.targetCurrency)
+                    .materialize()
+                return rateHistoryObservable
+            }
+            .share()
+        return rateHistoryObservable
+    }
+    
+    /// makes observable sequence for rate observable
+    ///
+    /// - Returns: `Observable<Event<[CurrencyRate]>>` sequence that emits events for underlying request sequence.
+    private func makeRatesObservable() -> Observable<Event<[CurrencyRate]>> {
+        let ratesObservable = viewState
+            .filter( { ![.idle, .error].contains($0) })
+            .flatMapLatest { _ in
+                let ratesObservable = self.fetchRatesUseCase.execute(self.baseCurrency, self.targetCurrencies)
+                    .materialize()
+                return ratesObservable
+            }
+            .share()
+        return ratesObservable
     }
 }

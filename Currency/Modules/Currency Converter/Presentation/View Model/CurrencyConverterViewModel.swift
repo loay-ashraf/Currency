@@ -115,7 +115,7 @@ class CurrencyConverterViewModel {
             .disposed(by: disposeBag)
     }
     
-    /// makes observable sequence for avialable currency symbols
+    /// makes observable sequence for available currency symbols
     ///
     /// - Returns: `Observable<Event<Double>>` sequence that emits events for underlying request sequence.
     private func makeSymbolsObservable() -> Observable<Event<[String]>> {
