@@ -14,7 +14,7 @@ class CurrencyConverterViewModel {
     private let fetchConversionResultUseCase: FetchConversionResultUseCase
     private let disposeBag = DisposeBag()
     // MARK: - View State
-    private(set) var viewState: PublishRelay<ViewState> = .init()
+    private(set) var viewState: PublishRelay<CurrencyConverterViewState> = .init()
     // MARK: - Inputs
     private(set) var selectedBaseCurrency: BehaviorRelay<String> = .init(value: "EUR")
     private(set) var selectedTargetCurrency: BehaviorRelay<String> = .init(value: "USD")

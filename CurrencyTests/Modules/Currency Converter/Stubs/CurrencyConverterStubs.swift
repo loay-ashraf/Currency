@@ -26,7 +26,7 @@ class CurrencyConverterStubs {
             return nil
         }
         let decoder = JSONDecoder()
-        let rateModel = try? decoder.decode(CurrencyConvertRateJSONModel.self, from: data)
+        let rateModel = try? decoder.decode(CurrencyConversionRateJSONModel.self, from: data)
         let firstRate = rateModel?.rates.values.first
         return firstRate
     }
