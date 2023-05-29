@@ -62,11 +62,11 @@ class CurrencyConverterViewController: UIViewController {
         let bar = UIToolbar()
         let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: nil)
         done.rx.tap
-            .bind(onNext: { _ in
-                self.fromCurrencyAmountTextField.resignFirstResponder()
-                self.toCurrencyAmountTextField.resignFirstResponder()
-                self.fromCurrencyAmountTextField.inputView = nil
-                self.toCurrencyAmountTextField.inputView = nil
+            .bind(onNext: { [weak self] _ in
+                self?.fromCurrencyAmountTextField.resignFirstResponder()
+                self?.toCurrencyAmountTextField.resignFirstResponder()
+                self?.fromCurrencyAmountTextField.inputView = nil
+                self?.toCurrencyAmountTextField.inputView = nil
             })
             .disposed(by: disposeBag)
         bar.items = [done]
@@ -84,15 +84,15 @@ class CurrencyConverterViewController: UIViewController {
     /// sets up UI reacive bindings for inputs
     private func setupInputBindings() {
         fromCurrencyButton.rx.tap
-            .bind(onNext: {
-                self.toCurrencyPickerView.isHidden = true
-                self.fromCurrencyPickerView.isHidden.toggle()
+            .bind(onNext: { [weak self] in
+                self?.toCurrencyPickerView.isHidden = true
+                self?.fromCurrencyPickerView.isHidden.toggle()
             })
             .disposed(by: disposeBag)
         toCurrencyButton.rx.tap
-            .bind(onNext: {
-                self.fromCurrencyPickerView.isHidden = true
-                self.toCurrencyPickerView.isHidden.toggle()
+            .bind(onNext: { [weak self] in
+                self?.fromCurrencyPickerView.isHidden = true
+                self?.toCurrencyPickerView.isHidden.toggle()
             })
             .disposed(by: disposeBag)
         fromCurrencyPickerView.rx.modelSelected(String.self)
@@ -124,12 +124,13 @@ class CurrencyConverterViewController: UIViewController {
             .bind(to: viewModel.targetCurrencyAmountInput)
             .disposed(by: disposeBag)
         swapCurrencyButton.rx.tap
-            .bind(onNext: {
-                self.swapCurrenciesAction()
+            .bind(onNext: { [weak self] in
+                self?.swapCurrenciesAction()
             })
             .disposed(by: disposeBag)
         currencyDetailsButton.rx.tap
-            .bind(onNext: {
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
                 let viewModel: CurrencyDetailsViewModel = {
                     let dataSource = DefaultCurrencyDetailsRemoteDataSource(networkManager: .shared)
                     let repository = DefaultCurrencyDetailsRepository(dataSource: dataSource)
@@ -153,18 +154,18 @@ class CurrencyConverterViewController: UIViewController {
             .bind(to: loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         viewModel.error
-            .drive(onNext: {
+            .drive(onNext: { [weak self] in
                 let alertController = UIAlertController(title: "Error", message: "An error occured.\n\($0.localizedDescription)", preferredStyle: .alert)
                 alertController.addAction(.init(title: "Ok", style: .default))
-                self.present(alertController, animated: true)
+                self?.present(alertController, animated: true)
             })
             .disposed(by: disposeBag)
         viewModel.currencySymbols
         // After picker view is populated, we select default currency row.
-            .do(afterNext: { symbols in
+            .do(afterNext: { [weak self] symbols in
                 let defaultFromCurrency = "EUR"
                 guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultFromCurrency) else { return }
-                self.fromCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
+                self?.fromCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
             })
             .drive(fromCurrencyPickerView.rx.itemTitles) { row, element in
                 return element
@@ -172,10 +173,10 @@ class CurrencyConverterViewController: UIViewController {
             .disposed(by: disposeBag)
         viewModel.currencySymbols
         // After picker view is populated, we select default currency row.
-            .do(afterNext: { symbols in
+            .do(afterNext: { [weak self] symbols in
                 let defaultToCurrency = "USD"
                 guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
-                self.toCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
+                self?.toCurrencyPickerView.selectRow(defaultCurrencyIndex, inComponent: 0, animated: false)
             })
             .drive(toCurrencyPickerView.rx.itemTitles) { row, element in
                 return element

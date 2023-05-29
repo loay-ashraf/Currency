@@ -121,7 +121,8 @@ class CurrencyConverterViewModel {
     private func makeSymbolsObservable() -> Observable<Event<[String]>> {
         let symbolsObservable = viewState
             .filter( { ![.idle, .loading(loadType: .baseConversion), .loading(loadType: .targetConversion), .error].contains($0) })
-            .flatMapLatest { _ in
+            .flatMapLatest { [weak self] _ in
+                guard let self = self else { return Observable<Event<[String]>>.empty() }
                 let conversionResultObservable = self.fetchSymbolsUseCase.execute()
                     .map {
                         $0.value
@@ -139,7 +140,8 @@ class CurrencyConverterViewModel {
     private func makeInitialConversionObservable() -> Observable<Event<Double>> {
         let initialBaseConversionResultObservable = viewState
             .filter( { ![.idle, .loading(loadType: .baseConversion), .loading(loadType: .targetConversion), .error].contains($0) })
-            .flatMapLatest { _ in
+            .flatMapLatest { [weak self] _ in
+                guard let self = self else { return Observable<Event<Double>>.empty() }
                 let conversionResultObservable = self.fetchConversionResultUseCase.execute(self.selectedBaseCurrency.value,
                                                                                            self.selectedTargetCurrency.value,
                                                                                            self.baseCurrencyAmountInput.value)
@@ -160,7 +162,8 @@ class CurrencyConverterViewModel {
         let baseConversionResultObservable = viewState
             .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .targetConversion), .error].contains($0) })
-            .flatMapLatest { _ in
+            .flatMapLatest { [weak self] _ in
+                guard let self = self else { return Observable<Event<Double>>.empty() }
                 let conversionResultObservable = self.fetchConversionResultUseCase.execute(self.selectedBaseCurrency.value,
                                                                                            self.selectedTargetCurrency.value,
                                                                                            self.baseCurrencyAmountInput.value)
@@ -181,7 +184,8 @@ class CurrencyConverterViewModel {
         let targetConversionResultObservable = viewState
             .debounce(.milliseconds(100), scheduler: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .filter( { ![.idle, .loading(loadType: .initial), .loading(loadType: .baseConversion), .error].contains($0) })
-            .flatMapLatest { _ in
+            .flatMapLatest { [weak self] _ in
+                guard let self = self else { return Observable<Event<Double>>.empty() }
                 let conversionResultObservable = self.fetchConversionResultUseCase.execute(self.selectedTargetCurrency.value,
                                                                                            self.selectedBaseCurrency.value,
                                                                                            self.targetCurrencyAmountInput.value)

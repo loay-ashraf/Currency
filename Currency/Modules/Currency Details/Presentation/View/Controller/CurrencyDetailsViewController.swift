@@ -56,10 +56,10 @@ class CurrencyDetailsViewController: UIViewController {
             .bind(to: loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         viewModel?.error
-            .drive(onNext: {
+            .drive(onNext: { [weak self] in
                 let alertController = UIAlertController(title: "Error", message: "An error occured.\n\($0.localizedDescription)", preferredStyle: .alert)
                 alertController.addAction(.init(title: "Ok", style: .default))
-                self.present(alertController, animated: true)
+                self?.present(alertController, animated: true)
             })
             .disposed(by: disposeBag)
         viewModel?.rateHistory

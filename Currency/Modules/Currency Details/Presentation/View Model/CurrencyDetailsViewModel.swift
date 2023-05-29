@@ -93,7 +93,8 @@ class CurrencyDetailsViewModel {
     private func makeRateHistoryObservable() -> Observable<Event<[CurrencyRateHistoryRecord]>> {
         let rateHistoryObservable = viewState
             .filter( { ![.idle, .error].contains($0) })
-            .flatMapLatest { _ in
+            .flatMapLatest { [weak self] _ in
+                guard let self = self else { return Observable<Event<[CurrencyRateHistoryRecord]>>.empty() }
                 let rateHistoryObservable = self.fetchRateHistoryUseCase.execute(self.baseCurrency, self.targetCurrency)
                     .materialize()
                 return rateHistoryObservable
@@ -108,7 +109,8 @@ class CurrencyDetailsViewModel {
     private func makeRatesObservable() -> Observable<Event<[CurrencyRate]>> {
         let ratesObservable = viewState
             .filter( { ![.idle, .error].contains($0) })
-            .flatMapLatest { _ in
+            .flatMapLatest { [weak self] _ in
+                guard let self = self else { return Observable<Event<[CurrencyRate]>>.empty() }
                 let ratesObservable = self.fetchRatesUseCase.execute(self.baseCurrency, self.targetCurrencies)
                     .materialize()
                 return ratesObservable
