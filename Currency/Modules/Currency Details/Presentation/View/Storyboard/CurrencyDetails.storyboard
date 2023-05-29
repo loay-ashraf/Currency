@@ -18,14 +18,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bFS-Lk-0rj">
-                                <rect key="frame" x="20" y="79" width="353" height="753"/>
+                                <rect key="frame" x="20" y="79" width="353.33333333333331" height="753"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRL-Ui-wUA">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="753"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nRL-Ui-wUA">
+                                        <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="753"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bD7-Yw-xks">
-                                                <rect key="frame" x="0.0" y="0.0" width="353" height="753"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="753"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="753" id="1oy-PC-DNF"/>
+                                                    <constraint firstAttribute="width" constant="171.66999999999999" id="SM8-g5-D28"/>
+                                                </constraints>
+                                            </tableView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Wgh-xE-Xhq">
+                                                <rect key="frame" x="181.66666666666669" y="0.0" width="171.66666666666669" height="753"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="171.66999999999999" id="UkE-Js-zGg"/>
+                                                    <constraint firstAttribute="height" constant="753" id="dG0-qN-auo"/>
+                                                </constraints>
                                             </tableView>
                                         </subviews>
                                     </stackView>
@@ -53,6 +65,7 @@
                     <connections>
                         <outlet property="loadingIndicator" destination="vGk-3f-OEe" id="ACV-pJ-jpl"/>
                         <outlet property="rateHistoryTableView" destination="bD7-Yw-xks" id="BlV-71-2v0"/>
+                        <outlet property="ratesTableView" destination="Wgh-xE-Xhq" id="sVy-Ne-YRU"/>
                         <outlet property="view" destination="bD7-Yw-xks" id="SxP-KD-hIa"/>
                     </connections>
                 </viewController>

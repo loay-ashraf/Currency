@@ -13,6 +13,7 @@ class CurrencyDetailsViewController: UIViewController {
     var viewModel: CurrencyDetailsViewModel?
     private let disposeBag = DisposeBag()
     @IBOutlet weak var rateHistoryTableView: UITableView!
+    @IBOutlet weak var ratesTableView: UITableView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,17 @@ class CurrencyDetailsViewController: UIViewController {
     }
     private func setupUI() {
         rateHistoryTableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
+        ratesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        rateHistoryTableView.layer.masksToBounds = true
+        rateHistoryTableView.layer.borderColor = UIColor.lightGray.cgColor
+        rateHistoryTableView.layer.borderWidth = 2.0
+        rateHistoryTableView.layer.cornerCurve = .continuous
+        rateHistoryTableView.layer.cornerRadius = 10.0
+        ratesTableView.layer.masksToBounds = true
+        ratesTableView.layer.borderColor = UIColor.lightGray.cgColor
+        ratesTableView.layer.borderWidth = 2.0
+        ratesTableView.layer.cornerCurve = .continuous
+        ratesTableView.layer.cornerRadius = 10.0
     }
     private func setupUIBindings() {
         setupOutputBindings()
@@ -43,6 +55,11 @@ class CurrencyDetailsViewController: UIViewController {
             .drive(rateHistoryTableView.rx.items(cellIdentifier: "Cell", cellType: TableViewCell.self)) { (row, item, cell) in
                 cell.textLabel?.text = item.date
                 cell.detailTextLabel?.text = "1.0 \(item.base) -> \(item.value) \(item.target)"
+            }
+            .disposed(by: disposeBag)
+        viewModel?.rates
+            .drive(ratesTableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, item, cell) in
+                cell.textLabel?.text = "\(item.target) -> \(item.value)"
             }
             .disposed(by: disposeBag)
     }

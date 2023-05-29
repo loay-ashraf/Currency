@@ -93,7 +93,8 @@ class CurrencyConverterViewController: UIViewController {
                     let dataSource = DefaultCurrencyDetailsRemoteDataSource(networkManager: .shared)
                     let repository = DefaultCurrencyDetailsRepository(dataSource: dataSource)
                     let fetchRateHistoryUseCase = DefaultFetchRateHistoryUseCase(repository: repository)
-                    let viewModel = CurrencyDetailsViewModel(baseCurrency: self.viewModel.selectedBaseCurrency.value, targetCurrency: self.viewModel.selectedTargetCurrency.value, fetchRateHistoryUseCase: fetchRateHistoryUseCase)
+                    let fetchRatesUseCase = DefaultFetchRatesUseCase(repository: repository)
+                    let viewModel = CurrencyDetailsViewModel(baseCurrency: self.viewModel.selectedBaseCurrency.value, targetCurrency: self.viewModel.selectedTargetCurrency.value, fetchRateHistoryUseCase: fetchRateHistoryUseCase, fetchRatesUseCase: fetchRatesUseCase)
                     return viewModel
                 }()
                 let viewController = UIStoryboard(name: "CurrencyDetails", bundle: nil).instantiateViewController(withIdentifier: String(describing: CurrencyDetailsViewController.self)) as! CurrencyDetailsViewController

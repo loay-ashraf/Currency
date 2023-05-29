@@ -8,5 +8,6 @@
 import RxSwift
 
 protocol CurrencyDetailsRepository {
+    func fetchRate(_ targets: [String]) -> Observable<[String: Double]>
     func fectchRateHistory(_ date: String, _ target: String) -> Observable<Double>
 }

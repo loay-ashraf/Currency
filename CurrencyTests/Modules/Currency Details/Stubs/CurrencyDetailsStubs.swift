@@ -13,7 +13,7 @@ class CurrencyDetailsStubs {
             return nil
         }
         let decoder = JSONDecoder()
-        let symbolsModel = try? decoder.decode(CurrencyRateHistoryJSONModel.self, from: data)
+        let symbolsModel = try? decoder.decode(CurrencyRateHistoryRecordJSONModel.self, from: data)
         return symbolsModel?.rates.values.first
     }
     static var secondDayRateHistory: Double? {
@@ -22,7 +22,7 @@ class CurrencyDetailsStubs {
             return nil
         }
         let decoder = JSONDecoder()
-        let symbolsModel = try? decoder.decode(CurrencyRateHistoryJSONModel.self, from: data)
+        let symbolsModel = try? decoder.decode(CurrencyRateHistoryRecordJSONModel.self, from: data)
         return symbolsModel?.rates.values.first
     }
     static var thirdDayRateHistory: Double? {
@@ -31,7 +31,7 @@ class CurrencyDetailsStubs {
             return nil
         }
         let decoder = JSONDecoder()
-        let symbolsModel = try? decoder.decode(CurrencyRateHistoryJSONModel.self, from: data)
+        let symbolsModel = try? decoder.decode(CurrencyRateHistoryRecordJSONModel.self, from: data)
         return symbolsModel?.rates.values.first
     }
 //    func stubFamousCurrencyConverts() -> FamousCurrenciesEntity? {
