@@ -72,7 +72,7 @@
 		C650C9ED2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EC2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift */; };
 		C650C9F02A23DFEE00A33C36 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */; };
 		C650C9FB2A2451E900A33C36 /* RateHistoryStub3.json in Resources */ = {isa = PBXBuildFile; fileRef = C650C9F32A2451E900A33C36 /* RateHistoryStub3.json */; };
-		C650C9FC2A2451E900A33C36 /* FamousCurrenciesStubs.json in Resources */ = {isa = PBXBuildFile; fileRef = C650C9F42A2451E900A33C36 /* FamousCurrenciesStubs.json */; };
+		C650C9FC2A2451E900A33C36 /* RatesStub.json in Resources */ = {isa = PBXBuildFile; fileRef = C650C9F42A2451E900A33C36 /* RatesStub.json */; };
 		C650C9FD2A2451E900A33C36 /* CurrencyDetailsStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9F52A2451E900A33C36 /* CurrencyDetailsStubs.swift */; };
 		C650C9FE2A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9F82A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift */; };
 		C650C9FF2A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9F92A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift */; };
@@ -82,6 +82,7 @@
 		C650CA082A24651200A33C36 /* FetchRatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA072A24651200A33C36 /* FetchRatesUseCase.swift */; };
 		C650CA0A2A24658700A33C36 /* DefaultFetchRatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA092A24658700A33C36 /* DefaultFetchRatesUseCase.swift */; };
 		C650CA0C2A2468EC00A33C36 /* CurrencyRateJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA0B2A2468EC00A33C36 /* CurrencyRateJSONModel.swift */; };
+		C650CA0E2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA0D2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,7 +173,7 @@
 		C650C9EC2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyDetailsRemoteDataSource.swift; sourceTree = "<group>"; };
 		C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C650C9F32A2451E900A33C36 /* RateHistoryStub3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RateHistoryStub3.json; sourceTree = "<group>"; };
-		C650C9F42A2451E900A33C36 /* FamousCurrenciesStubs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FamousCurrenciesStubs.json; sourceTree = "<group>"; };
+		C650C9F42A2451E900A33C36 /* RatesStub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RatesStub.json; sourceTree = "<group>"; };
 		C650C9F52A2451E900A33C36 /* CurrencyDetailsStubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsStubs.swift; sourceTree = "<group>"; };
 		C650C9F82A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsRepositoryMock.swift; sourceTree = "<group>"; };
 		C650C9F92A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRateHistoryUseCaseTestCase.swift; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		C650CA072A24651200A33C36 /* FetchRatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRatesUseCase.swift; sourceTree = "<group>"; };
 		C650CA092A24658700A33C36 /* DefaultFetchRatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchRatesUseCase.swift; sourceTree = "<group>"; };
 		C650CA0B2A2468EC00A33C36 /* CurrencyRateJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateJSONModel.swift; sourceTree = "<group>"; };
+		C650CA0D2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRatesUseCaseTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -788,7 +790,7 @@
 		C650C9F22A2451E900A33C36 /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
-				C650C9F42A2451E900A33C36 /* FamousCurrenciesStubs.json */,
+				C650C9F42A2451E900A33C36 /* RatesStub.json */,
 				C650CA012A2453C400A33C36 /* RateHistoryStub1.json */,
 				C650CA032A2453F400A33C36 /* RateHistoryStub2.json */,
 				C650C9F32A2451E900A33C36 /* RateHistoryStub3.json */,
@@ -800,6 +802,7 @@
 		C650C9F62A2451E900A33C36 /* Test Cases */ = {
 			isa = PBXGroup;
 			children = (
+				C650CA0D2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift */,
 				C650C9F92A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift */,
 			);
 			path = "Test Cases";
@@ -907,7 +910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C622790A2A235307008A71DC /* RateStub.json in Resources */,
-				C650C9FC2A2451E900A33C36 /* FamousCurrenciesStubs.json in Resources */,
+				C650C9FC2A2451E900A33C36 /* RatesStub.json in Resources */,
 				C622790C2A235307008A71DC /* SymbolsStub.json in Resources */,
 				C650C9FB2A2451E900A33C36 /* RateHistoryStub3.json in Resources */,
 			);
@@ -935,6 +938,7 @@
 				C62279102A235307008A71DC /* FetchConversionRateUseCaseTestCase.swift in Sources */,
 				C650C9FF2A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift in Sources */,
 				C650CA022A2453C400A33C36 /* RateHistoryStub1.json in Sources */,
+				C650CA0E2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift in Sources */,
 				C622790D2A235307008A71DC /* CurrencyConverterRespositoryMock.swift in Sources */,
 				C622790B2A235307008A71DC /* CurrencyConverterStubs.swift in Sources */,
 				C622790E2A235307008A71DC /* FetchSymbolsUseCaseTestCase.swift in Sources */,
