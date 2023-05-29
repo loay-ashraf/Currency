@@ -330,7 +330,6 @@
 			isa = PBXGroup;
 			children = (
 				C650CA0F2A249C0800A33C36 /* Constants */,
-				C62278B22A227850008A71DC /* Network */,
 				C622788B2A2234C2008A71DC /* Extensions */,
 			);
 			path = Support;
@@ -561,8 +560,8 @@
 		C63EF7AC2A2221DE00A482EB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				C622787E2A222492008A71DC /* Currency Converter */,
-				C650C9BA2A23896100A33C36 /* Currency Details */,
+				C650CA132A249D9300A33C36 /* Helper */,
+				C650CA122A249D8900A33C36 /* Core */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -825,6 +824,23 @@
 				C650CA102A249C1500A33C36 /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		C650CA122A249D8900A33C36 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C622787E2A222492008A71DC /* Currency Converter */,
+				C650C9BA2A23896100A33C36 /* Currency Details */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C650CA132A249D9300A33C36 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C62278B22A227850008A71DC /* Network */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
