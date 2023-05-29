@@ -8,10 +8,21 @@
 import RxSwift
 
 class DefaultFetchRatesUseCase: FetchRatesUseCase {
+    // MARK: - Private Properties
     private let repository: CurrencyDetailsRepository
+    // MARK: - Initializer
     init(repository: CurrencyDetailsRepository) {
         self.repository = repository
     }
+    // MARK: - Instance Methods
+    
+    /// executes main task of the use case (fetches conversion rates for a base and a set of target currencies)
+    /// 
+    /// - Parameters:
+    ///   - base: `String` base currency symbol
+    ///   - targets: `[String]` target currencies symbols
+    ///
+    /// - Returns: `Observable<[CurrencyRate]>` sequence that emits conversion rates or an error.
     func execute(_ base: String, _ targets: [String]) -> Observable<[CurrencyRate]> {
         if base == "EUR" {
             return fetchDefaultBaseCurrencyRate(targets)
@@ -19,6 +30,13 @@ class DefaultFetchRatesUseCase: FetchRatesUseCase {
             return fetchBaseCurrencyRate(base, targets)
         }
     }
+    
+    /// fetches conversion rates for default base "EUR" and a set of target currencies
+    ///
+    /// - Parameters:
+    ///   - targets: `[String]` target currencies symbols
+    ///
+    /// - Returns: `Observable<CurrencyConversionResult>` sequence that emits conversion rates or an error.
     private func fetchDefaultBaseCurrencyRate(_ targets: [String]) -> Observable<[CurrencyRate]> {
         let observable = repository.fetchRate(targets)
         return observable
@@ -28,6 +46,14 @@ class DefaultFetchRatesUseCase: FetchRatesUseCase {
                 }
             }
     }
+    
+    /// fetches conversion rates for a base and a set of target currencies
+    ///
+    /// - Parameters:
+    ///   - base: `String` base currency symbol
+    ///   - targets: `[String]` target currencies symbols
+    ///
+    /// - Returns: `Observable<[CurrencyRate]>` sequence that emits conversion rates or an error.
     private func fetchBaseCurrencyRate(_ base: String, _ targets: [String]) -> Observable<[CurrencyRate]> {
         var observables: [Observable<CurrencyRate>] = []
         for target in targets {

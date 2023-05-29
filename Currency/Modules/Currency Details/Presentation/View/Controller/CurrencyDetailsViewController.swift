@@ -10,11 +10,15 @@ import RxSwift
 import RxCocoa
 
 class CurrencyDetailsViewController: UIViewController {
+    // MARK: - Properties
     var viewModel: CurrencyDetailsViewModel?
+    // MARK: - Private Properties
     private let disposeBag = DisposeBag()
+    // MARK: - UI Outlets
     @IBOutlet weak var rateHistoryTableView: UITableView!
     @IBOutlet weak var ratesTableView: UITableView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -22,6 +26,9 @@ class CurrencyDetailsViewController: UIViewController {
         setupUIBindings()
         startLoading()
     }
+    // MARK: - Instance Methods
+    
+    /// sets up UI by registering cells for table views and adding border and corner radius
     private func setupUI() {
         rateHistoryTableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         ratesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -36,9 +43,13 @@ class CurrencyDetailsViewController: UIViewController {
         ratesTableView.layer.cornerCurve = .continuous
         ratesTableView.layer.cornerRadius = 10.0
     }
+    
+    /// sets up UI reacive bindings for inputs and outputs
     private func setupUIBindings() {
         setupOutputBindings()
     }
+    
+    /// sets up UI reacive bindings for outputs
     private func setupOutputBindings() {
         viewModel?.viewState
             .map({ [.loading(loadType: .initial)].contains($0) })
@@ -63,6 +74,8 @@ class CurrencyDetailsViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
+    
+    /// start initial loading
     private func startLoading() {
         viewModel?.viewState.accept(.loading(loadType: .initial))
     }

@@ -8,10 +8,22 @@
 import RxSwift
 
 class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
+    // MARK: - Private Properties
     private let repository: CurrencyConverterRepository
+    // MARK: - Initializer
     init(repository: CurrencyConverterRepository) {
         self.repository = repository
     }
+    // MARK: - Instance Methods
+    
+    /// executes main task of the use case (converts base currency into target currency)
+    /// 
+    /// - Parameters:
+    ///   - base: `String` base currency symbol
+    ///   - target: `String` target currency symbol
+    ///   - amount: `Double` base currency amount
+    ///
+    /// - Returns: `Observable<CurrencyConversionResult>` sequence that emits conversion result or an error.
     func execute(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
         if base == "EUR" {
             return convertDefaultBaseCurrency(target, amount)
@@ -21,6 +33,14 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
             return convertCurrency(base, target, amount)
         }
     }
+    
+    /// converts base currency to target currency if base is the default "EUR"
+    ///
+    /// - Parameters:
+    ///   - target: `String` target currency symbol
+    ///   - amount: `Double` base currency amount
+    ///
+    /// - Returns: `Observable<CurrencyConversionResult>` sequence that emits conversion result or an error.
     private func convertDefaultBaseCurrency(_ target: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
         return repository.fetchConversionRate(target)
             .map {
@@ -28,6 +48,14 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
                 return .init(value: result)
             }
     }
+    
+    /// converts base currency to base currency if target is the default "EUR"
+    ///
+    /// - Parameters:
+    ///   - base: `String` base currency symbol
+    ///   - amount: `Double` base currency amount
+    ///
+    /// - Returns: `Observable<CurrencyConversionResult>` sequence that emits conversion result or an error.
     private func convertDefaultTargetCurrency(_ base: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
         return repository.fetchConversionRate(base)
             .map {
@@ -35,6 +63,15 @@ class DefaultFetchConversionResultUseCase: FetchConversionResultUseCase {
                 return .init(value: result)
             }
     }
+    
+    /// converts base currency to target currency
+    ///
+    /// - Parameters:
+    ///   - base: `String` base currency symbol
+    ///   - target: `String` target currency symbol
+    ///   - amount: `Double` base currency amount
+    ///
+    /// - Returns: `Observable<CurrencyConversionResult>` sequence that emits conversion result or an error.
     private func convertCurrency(_ base: String, _ target: String, _ amount: Double) -> Observable<CurrencyConversionResult> {
         let baseRateObservable = repository.fetchConversionRate(base)
         let targetRateObservable = repository.fetchConversionRate(target)

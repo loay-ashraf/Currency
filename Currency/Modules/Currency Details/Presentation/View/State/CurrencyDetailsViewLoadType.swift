@@ -7,8 +7,4 @@
 
 enum CurrencyDetailsViewLoadType {
     case initial
-    case baseDriven
-    case targetDriven
-    case refresh
-    case paginate
 }

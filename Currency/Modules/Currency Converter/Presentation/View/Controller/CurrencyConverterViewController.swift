@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 class CurrencyConverterViewController: UIViewController {
+    // MARK: - Private Properties
     private let viewModel: CurrencyConverterViewModel = {
         let dataSource = DefaultCurrencyConverterRemoteDataSource(networkManager: .shared)
         let repository = DefaultCurrencyConverterRepository(dataSource: dataSource)
@@ -19,6 +20,7 @@ class CurrencyConverterViewController: UIViewController {
         return viewModel
     }()
     private let disposeBag = DisposeBag()
+    // MARK: - UI Outlets
     @IBOutlet weak var currencyConverterStackView: UIStackView!
     @IBOutlet weak var fromCurrencyButton: UIButton!
     @IBOutlet weak var toCurrencyButton: UIButton!
@@ -29,7 +31,7 @@ class CurrencyConverterViewController: UIViewController {
     @IBOutlet weak var fromCurrencyAmountTextField: UITextField!
     @IBOutlet weak var toCurrencyAmountTextField: UITextField!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    
+    // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -37,10 +39,49 @@ class CurrencyConverterViewController: UIViewController {
         setupUIBindings()
         startLoading()
     }
+    // MARK: - Instance Methods
+    
+    /// sets up UI by adding corner radius and drop shadows
+    private func setupUI() {
+        currencyConverterStackView.setRadiusAndShadow()
+        currencyConverterStackView.backgroundColor = .lightGray
+        fromCurrencyButton.tintColor = .white
+        toCurrencyButton.tintColor = .white
+        swapCurrencyButton.setRadiusAndShadow()
+        swapCurrencyButton.backgroundColor = .black
+        swapCurrencyButton.tintColor = .white
+        currencyDetailsButton.setRadiusAndShadow()
+        currencyDetailsButton.backgroundColor = .black
+        currencyDetailsButton.tintColor = .white
+        fromCurrencyAmountTextField.text = "1.0"
+        setupKeyboardUI()
+    }
+    
+    /// sets up keyboard UI by adding toolbar with "Done" button
+    private func setupKeyboardUI() {
+        let bar = UIToolbar()
+        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: nil)
+        done.rx.tap
+            .bind(onNext: { _ in
+                self.fromCurrencyAmountTextField.resignFirstResponder()
+                self.toCurrencyAmountTextField.resignFirstResponder()
+                self.fromCurrencyAmountTextField.inputView = nil
+                self.toCurrencyAmountTextField.inputView = nil
+            })
+            .disposed(by: disposeBag)
+        bar.items = [done]
+        bar.sizeToFit()
+        fromCurrencyAmountTextField.inputAccessoryView = bar
+        toCurrencyAmountTextField.inputAccessoryView = bar
+    }
+    
+    /// sets up UI reacive bindings for inputs and outputs
     private func setupUIBindings() {
         setupInputBindings()
         setupOutputBindings()
     }
+    
+    /// sets up UI reacive bindings for inputs
     private func setupInputBindings() {
         fromCurrencyButton.rx.tap
             .bind(onNext: {
@@ -104,9 +145,11 @@ class CurrencyConverterViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    /// sets up UI reacive bindings for outputs
     private func setupOutputBindings() {
         viewModel.viewState
-            .map({ [.loading(loadType: .initial), .loading(loadType: .baseDriven), .loading(loadType: .targetDriven)].contains($0) })
+            .map({ [.loading(loadType: .initial), .loading(loadType: .baseConversion), .loading(loadType: .targetConversion)].contains($0) })
             .bind(to: loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         viewModel.error
@@ -117,6 +160,7 @@ class CurrencyConverterViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         viewModel.currencySymbols
+        // After picker view is populated, we select default currency row.
             .do(afterNext: { symbols in
                 let defaultFromCurrency = "EUR"
                 guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultFromCurrency) else { return }
@@ -127,6 +171,7 @@ class CurrencyConverterViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         viewModel.currencySymbols
+        // After picker view is populated, we select default currency row.
             .do(afterNext: { symbols in
                 let defaultToCurrency = "USD"
                 guard let defaultCurrencyIndex = symbols.firstIndex(of: defaultToCurrency) else { return }
@@ -151,9 +196,14 @@ class CurrencyConverterViewController: UIViewController {
             .drive(toCurrencyAmountTextField.rx.text)
             .disposed(by: disposeBag)
     }
+    
+    /// start initial loading
     private func startLoading() {
+        // mutate view state to trigger loading
         viewModel.viewState.accept(.loading(loadType: .initial))
     }
+    
+    /// swap currencies symbols and amounts
     private func swapCurrenciesAction() {
         let baseCurrency = viewModel.selectedBaseCurrency.value
         let targetCurrency = viewModel.selectedTargetCurrency.value
@@ -161,45 +211,17 @@ class CurrencyConverterViewController: UIViewController {
         let targetCurrencyIndex = toCurrencyPickerView.selectedRow(inComponent: 0)
         let baseCurrencyAmount = fromCurrencyAmountTextField.text ?? "0.0"
         let targetCurrencyAmount = toCurrencyAmountTextField.text ?? "0.0"
+        // Swap view model input values
         viewModel.selectedBaseCurrency.accept(targetCurrency)
         viewModel.selectedTargetCurrency.accept(baseCurrency)
         viewModel.baseCurrencyAmountInput.accept(Double(targetCurrencyAmount) ?? 0.0)
         viewModel.targetCurrencyAmountInput.accept(Double(baseCurrencyAmount) ?? 0.0)
+        // Swap UI values
         fromCurrencyButton.setTitle(targetCurrency, for: .normal)
         toCurrencyButton.setTitle(baseCurrency, for: .normal)
         fromCurrencyAmountTextField.text = targetCurrencyAmount
         toCurrencyAmountTextField.text = baseCurrencyAmount
         fromCurrencyPickerView.selectRow(targetCurrencyIndex, inComponent: 0, animated: false)
         toCurrencyPickerView.selectRow(baseCurrencyIndex, inComponent: 0, animated: false)
-    }
-    private func setupUI() {
-        currencyConverterStackView.setRadiusAndShadow()
-        currencyConverterStackView.backgroundColor = .lightGray
-        fromCurrencyButton.tintColor = .white
-        toCurrencyButton.tintColor = .white
-        swapCurrencyButton.setRadiusAndShadow()
-        swapCurrencyButton.backgroundColor = .black
-        swapCurrencyButton.tintColor = .white
-        currencyDetailsButton.setRadiusAndShadow()
-        currencyDetailsButton.backgroundColor = .black
-        currencyDetailsButton.tintColor = .white
-        fromCurrencyAmountTextField.text = "1.0"
-        setupKeyboardUI()
-    }
-    private func setupKeyboardUI() {
-        let bar = UIToolbar()
-        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: nil)
-        done.rx.tap
-            .bind(onNext: { _ in
-                self.fromCurrencyAmountTextField.resignFirstResponder()
-                self.toCurrencyAmountTextField.resignFirstResponder()
-                self.fromCurrencyAmountTextField.inputView = nil
-                self.toCurrencyAmountTextField.inputView = nil
-            })
-            .disposed(by: disposeBag)
-        bar.items = [done]
-        bar.sizeToFit()
-        fromCurrencyAmountTextField.inputAccessoryView = bar
-        toCurrencyAmountTextField.inputAccessoryView = bar
     }
 }
