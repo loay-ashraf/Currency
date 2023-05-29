@@ -10,15 +10,10 @@ import RxSwift
 import RxCocoa
 
 class CurrencyConverterViewController: UIViewController {
+    // MARK: - Properties
+    var viewModel: CurrencyConverterViewModel?
+    weak var coordinator: AppCoordinator?
     // MARK: - Private Properties
-    private let viewModel: CurrencyConverterViewModel = {
-        let dataSource = DefaultCurrencyConverterRemoteDataSource(networkManager: .shared)
-        let repository = DefaultCurrencyConverterRepository(dataSource: dataSource)
-        let fetchSymbolsUseCase = DefaultFetchSymbolsUseCase(repository: repository)
-        let fetchConversionResultUseCase = DefaultFetchConversionResultUseCase(repository: repository)
-        let viewModel = CurrencyConverterViewModel(fetchSymbolsUseCase: fetchSymbolsUseCase, fetchConversionResultUseCase: fetchConversionResultUseCase)
-        return viewModel
-    }()
     private let disposeBag = DisposeBag()
     // MARK: - UI Outlets
     @IBOutlet weak var currencyConverterStackView: UIStackView!
@@ -43,6 +38,11 @@ class CurrencyConverterViewController: UIViewController {
     
     /// sets up UI by adding corner radius and drop shadows
     private func setupUI() {
+        // Setup navigation title
+        navigationItem.title = "Currency Converter"
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        // Setup view styles (colors, shadows and corner radii)
         currencyConverterStackView.setRadiusAndShadow()
         currencyConverterStackView.backgroundColor = .lightGray
         fromCurrencyButton.tintColor = .white
@@ -83,6 +83,7 @@ class CurrencyConverterViewController: UIViewController {
     
     /// sets up UI reacive bindings for inputs
     private func setupInputBindings() {
+        guard let viewModel = viewModel else { return }
         fromCurrencyButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.toCurrencyPickerView.isHidden = true
@@ -130,37 +131,27 @@ class CurrencyConverterViewController: UIViewController {
             .disposed(by: disposeBag)
         currencyDetailsButton.rx.tap
             .bind(onNext: { [weak self] in
-                guard let self = self else { return }
-                let viewModel: CurrencyDetailsViewModel = {
-                    let dataSource = DefaultCurrencyDetailsRemoteDataSource(networkManager: .shared)
-                    let repository = DefaultCurrencyDetailsRepository(dataSource: dataSource)
-                    let fetchRateHistoryUseCase = DefaultFetchRateHistoryUseCase(repository: repository)
-                    let fetchRatesUseCase = DefaultFetchRatesUseCase(repository: repository)
-                    let viewModel = CurrencyDetailsViewModel(baseCurrency: self.viewModel.selectedBaseCurrency.value, targetCurrency: self.viewModel.selectedTargetCurrency.value, fetchRateHistoryUseCase: fetchRateHistoryUseCase, fetchRatesUseCase: fetchRatesUseCase)
-                    return viewModel
-                }()
-                let viewController = UIStoryboard(name: "CurrencyDetails", bundle: nil).instantiateViewController(withIdentifier: String(describing: CurrencyDetailsViewController.self)) as! CurrencyDetailsViewController
-                viewController.viewModel = viewModel
-                viewController.modalPresentationStyle = .pageSheet
-                self.present(viewController, animated: true)
+                guard let baseCurrency = self?.viewModel?.selectedBaseCurrency.value,
+                      let targetCurrency = self?.viewModel?.selectedTargetCurrency.value else { return }
+                self?.coordinator?.trigger(.currencyDetails(baseCurrency: baseCurrency, targetCurrency: targetCurrency))
             })
             .disposed(by: disposeBag)
     }
     
     /// sets up UI reacive bindings for outputs
     private func setupOutputBindings() {
-        viewModel.viewState
+        viewModel?.viewState
             .map({ [.loading(loadType: .initial), .loading(loadType: .baseConversion), .loading(loadType: .targetConversion)].contains($0) })
             .bind(to: loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
-        viewModel.error
+        viewModel?.error
             .drive(onNext: { [weak self] in
                 let alertController = UIAlertController(title: "Error", message: "An error occured.\n\($0.localizedDescription)", preferredStyle: .alert)
                 alertController.addAction(.init(title: "Ok", style: .default))
                 self?.present(alertController, animated: true)
             })
             .disposed(by: disposeBag)
-        viewModel.currencySymbols
+        viewModel?.currencySymbols
         // After picker view is populated, we select default currency row.
             .do(afterNext: { [weak self] symbols in
                 let defaultFromCurrency = Constants.defaultBaseCurrency
@@ -171,7 +162,7 @@ class CurrencyConverterViewController: UIViewController {
                 return element
             }
             .disposed(by: disposeBag)
-        viewModel.currencySymbols
+        viewModel?.currencySymbols
         // After picker view is populated, we select default currency row.
             .do(afterNext: { [weak self] symbols in
                 let defaultToCurrency = Constants.defaultTargetCurrency
@@ -182,17 +173,17 @@ class CurrencyConverterViewController: UIViewController {
                 return element
             }
             .disposed(by: disposeBag)
-        viewModel.selectedBaseCurrency
+        viewModel?.selectedBaseCurrency
             .bind(to: fromCurrencyButton.rx.title())
             .disposed(by: disposeBag)
-        viewModel.selectedTargetCurrency
+        viewModel?.selectedTargetCurrency
             .bind(to: toCurrencyButton.rx.title())
             .disposed(by: disposeBag)
-        viewModel.baseCurrencyAmountOutput
+        viewModel?.baseCurrencyAmountOutput
             .map({ "\($0)" })
             .drive(fromCurrencyAmountTextField.rx.text)
             .disposed(by: disposeBag)
-        viewModel.targetCurrencyAmountOutput
+        viewModel?.targetCurrencyAmountOutput
             .map({ "\($0)" })
             .drive(toCurrencyAmountTextField.rx.text)
             .disposed(by: disposeBag)
@@ -201,11 +192,12 @@ class CurrencyConverterViewController: UIViewController {
     /// start initial loading
     private func startLoading() {
         // mutate view state to trigger loading
-        viewModel.viewState.accept(.loading(loadType: .initial))
+        viewModel?.viewState.accept(.loading(loadType: .initial))
     }
     
     /// swap currencies symbols and amounts
     private func swapCurrenciesAction() {
+        guard let viewModel = viewModel else { return }
         let baseCurrency = viewModel.selectedBaseCurrency.value
         let targetCurrency = viewModel.selectedTargetCurrency.value
         let baseCurrencyIndex = fromCurrencyPickerView.selectedRow(inComponent: 0)

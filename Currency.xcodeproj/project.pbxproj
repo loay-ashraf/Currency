@@ -84,6 +84,16 @@
 		C650CA0C2A2468EC00A33C36 /* CurrencyRateJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA0B2A2468EC00A33C36 /* CurrencyRateJSONModel.swift */; };
 		C650CA0E2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA0D2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift */; };
 		C650CA112A249C1500A33C36 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA102A249C1500A33C36 /* Constants.swift */; };
+		C650CA172A24B4AA00A33C36 /* Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA162A24B4AA00A33C36 /* Storyboardable.swift */; };
+		C650CA192A24B4B700A33C36 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA182A24B4B700A33C36 /* Storyboard.swift */; };
+		C650CA1B2A24B5C400A33C36 /* UIViewController+Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA1A2A24B5C400A33C36 /* UIViewController+Storyboardable.swift */; };
+		C650CA1F2A24B6D600A33C36 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA1E2A24B6D600A33C36 /* Coordinator.swift */; };
+		C650CA212A24B84100A33C36 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA202A24B84100A33C36 /* AppCoordinator.swift */; };
+		C650CA232A24B96700A33C36 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA222A24B96700A33C36 /* Route.swift */; };
+		C650CA252A24B9AB00A33C36 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA242A24B9AB00A33C36 /* AppRoute.swift */; };
+		C650CA282A24BF7E00A33C36 /* DIResolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA272A24BF7E00A33C36 /* DIResolvable.swift */; };
+		C650CA2A2A24BFCE00A33C36 /* CurrencyConverterViewController+DIResolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA292A24BFCE00A33C36 /* CurrencyConverterViewController+DIResolvable.swift */; };
+		C650CA2C2A24C09000A33C36 /* CurrencyDetailsViewController+DIResolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650CA2B2A24C09000A33C36 /* CurrencyDetailsViewController+DIResolvable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +196,16 @@
 		C650CA0B2A2468EC00A33C36 /* CurrencyRateJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateJSONModel.swift; sourceTree = "<group>"; };
 		C650CA0D2A2477B300A33C36 /* FetchRatesUseCaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRatesUseCaseTestCase.swift; sourceTree = "<group>"; };
 		C650CA102A249C1500A33C36 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C650CA162A24B4AA00A33C36 /* Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboardable.swift; sourceTree = "<group>"; };
+		C650CA182A24B4B700A33C36 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		C650CA1A2A24B5C400A33C36 /* UIViewController+Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboardable.swift"; sourceTree = "<group>"; };
+		C650CA1E2A24B6D600A33C36 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		C650CA202A24B84100A33C36 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		C650CA222A24B96700A33C36 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		C650CA242A24B9AB00A33C36 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
+		C650CA272A24BF7E00A33C36 /* DIResolvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIResolvable.swift; sourceTree = "<group>"; };
+		C650CA292A24BFCE00A33C36 /* CurrencyConverterViewController+DIResolvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyConverterViewController+DIResolvable.swift"; sourceTree = "<group>"; };
+		C650CA2B2A24C09000A33C36 /* CurrencyDetailsViewController+DIResolvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyDetailsViewController+DIResolvable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				C63EF79B2A221EAA00A482EB /* CurrencyConverterViewController.swift */,
+				C650CA292A24BFCE00A33C36 /* CurrencyConverterViewController+DIResolvable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -339,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */,
+				C650CA1A2A24B5C400A33C36 /* UIViewController+Storyboardable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -670,6 +692,7 @@
 			isa = PBXGroup;
 			children = (
 				C650C9C52A238B9800A33C36 /* CurrencyDetailsViewController.swift */,
+				C650CA2B2A24C09000A33C36 /* CurrencyDetailsViewController+DIResolvable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -838,9 +861,56 @@
 		C650CA132A249D9300A33C36 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				C650CA262A24BF6C00A33C36 /* DI */,
+				C650CA142A24B48F00A33C36 /* Navigation */,
 				C62278B22A227850008A71DC /* Network */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		C650CA142A24B48F00A33C36 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				C650CA1D2A24B69400A33C36 /* Route */,
+				C650CA1C2A24B68C00A33C36 /* Coordinator */,
+				C650CA152A24B49900A33C36 /* Storyboard */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		C650CA152A24B49900A33C36 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C650CA162A24B4AA00A33C36 /* Storyboardable.swift */,
+				C650CA182A24B4B700A33C36 /* Storyboard.swift */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		C650CA1C2A24B68C00A33C36 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				C650CA1E2A24B6D600A33C36 /* Coordinator.swift */,
+				C650CA202A24B84100A33C36 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		C650CA1D2A24B69400A33C36 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				C650CA222A24B96700A33C36 /* Route.swift */,
+				C650CA242A24B9AB00A33C36 /* AppRoute.swift */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
+		C650CA262A24BF6C00A33C36 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				C650CA272A24BF7E00A33C36 /* DIResolvable.swift */,
+			);
+			path = DI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -987,6 +1057,7 @@
 				C650C9E12A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift in Sources */,
 				C62278A12A2246A7008A71DC /* FetchConversionResultUseCase.swift in Sources */,
 				C62278CF2A227F3F008A71DC /* NetworkClientError.swift in Sources */,
+				C650CA212A24B84100A33C36 /* AppCoordinator.swift in Sources */,
 				C62278D52A227F87008A71DC /* HTTPStatusCode.swift in Sources */,
 				C650C9DF2A2391DB00A33C36 /* FetchRateHistoryUseCase.swift in Sources */,
 				C62278D12A227F3F008A71DC /* NetworkAPIError.swift in Sources */,
@@ -995,6 +1066,8 @@
 				C62278BD2A227A1A008A71DC /* HTTPScheme.swift in Sources */,
 				C650CA082A24651200A33C36 /* FetchRatesUseCase.swift in Sources */,
 				C650C9E92A2394A200A33C36 /* CurrencyRateHistoryRecordJSONModel.swift in Sources */,
+				C650CA172A24B4AA00A33C36 /* Storyboardable.swift in Sources */,
+				C650CA2A2A24BFCE00A33C36 /* CurrencyConverterViewController+DIResolvable.swift in Sources */,
 				C62278A32A224721008A71DC /* DefaultFetchConversionResultUseCase.swift in Sources */,
 				C62278D02A227F3F008A71DC /* NetworkError.swift in Sources */,
 				C650C9C82A238CE700A33C36 /* CurrencyDetailsViewModel.swift in Sources */,
@@ -1004,8 +1077,13 @@
 				C62278AF2A224F53008A71DC /* CurrencyConverterRemoteDataSource.swift in Sources */,
 				C650CA062A24641000A33C36 /* CurrencyRate.swift in Sources */,
 				C62278C42A227B21008A71DC /* CurrencyConverterRouter.swift in Sources */,
+				C650CA192A24B4B700A33C36 /* Storyboard.swift in Sources */,
+				C650CA2C2A24C09000A33C36 /* CurrencyDetailsViewController+DIResolvable.swift in Sources */,
 				C650C9C62A238B9800A33C36 /* CurrencyDetailsViewController.swift in Sources */,
+				C650CA252A24B9AB00A33C36 /* AppRoute.swift in Sources */,
 				C650C9E32A2392A000A33C36 /* CurrencyDetailsRepository.swift in Sources */,
+				C650CA1B2A24B5C400A33C36 /* UIViewController+Storyboardable.swift in Sources */,
+				C650CA232A24B96700A33C36 /* Route.swift in Sources */,
 				C62278A72A224AAE008A71DC /* DefaultFetchSymbolsUseCase.swift in Sources */,
 				C62278DC2A2285EA008A71DC /* CurrencyConversionRateJSONModel.swift in Sources */,
 				C62278B92A2278E0008A71DC /* NetworkRouter.swift in Sources */,
@@ -1020,6 +1098,8 @@
 				C650C9D12A238DFF00A33C36 /* CurrencyDetailsViewLoadType.swift in Sources */,
 				C63EF79A2A221EAA00A482EB /* SceneDelegate.swift in Sources */,
 				C62278B12A224F6F008A71DC /* DefaultCurrencyConverterRemoteDataSource.swift in Sources */,
+				C650CA282A24BF7E00A33C36 /* DIResolvable.swift in Sources */,
+				C650CA1F2A24B6D600A33C36 /* Coordinator.swift in Sources */,
 				C622788D2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift in Sources */,
 				C650CA0A2A24658700A33C36 /* DefaultFetchRatesUseCase.swift in Sources */,
 				C650C9E52A23939100A33C36 /* DefaultCurrencyDetailsRepository.swift in Sources */,

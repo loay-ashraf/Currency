@@ -12,6 +12,7 @@ import RxCocoa
 class CurrencyDetailsViewController: UIViewController {
     // MARK: - Properties
     var viewModel: CurrencyDetailsViewModel?
+    weak var coordinator: AppCoordinator?
     // MARK: - Private Properties
     private let disposeBag = DisposeBag()
     // MARK: - UI Outlets
@@ -30,8 +31,14 @@ class CurrencyDetailsViewController: UIViewController {
     
     /// sets up UI by registering cells for table views and adding border and corner radius
     private func setupUI() {
+        // Setup navigation title
+        navigationItem.title = "Currency Details"
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        // REgister cells fot table views
         rateHistoryTableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         ratesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        // Setup table view styles (colors, shadows and corner radii)
         rateHistoryTableView.layer.masksToBounds = true
         rateHistoryTableView.layer.borderColor = UIColor.lightGray.cgColor
         rateHistoryTableView.layer.borderWidth = 2.0
@@ -71,6 +78,7 @@ class CurrencyDetailsViewController: UIViewController {
         viewModel?.rates
             .drive(ratesTableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, item, cell) in
                 cell.textLabel?.text = "\(item.target) -> \(item.value)"
+                cell.selectionStyle = .none
             }
             .disposed(by: disposeBag)
     }
