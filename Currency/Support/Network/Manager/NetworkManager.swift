@@ -10,8 +10,17 @@ import RxSwift
 import RxCocoa
 
 class NetworkManager {
+    // MARK: - Static Properties
     static let shared = NetworkManager()
+    // MARK: - Initializer
     private init() {}
+    // MARK: - Instance Methods
+    
+    /// performs HTTP request.
+    ///
+    /// - Parameter router: router object that contains request details
+    ///
+    /// - Returns: generic `Observable` sequence that emits decoded response or an error.
     func request<T: Decodable>(using router: NetworkRouter) -> Observable<T> {
         let request = router.asURLRequest()
         dump(request)
