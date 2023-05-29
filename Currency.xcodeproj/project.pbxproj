@@ -71,6 +71,13 @@
 		C650C9EB2A23B29900A33C36 /* CurrencyDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EA2A23B29900A33C36 /* CurrencyDetailsRouter.swift */; };
 		C650C9ED2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EC2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift */; };
 		C650C9F02A23DFEE00A33C36 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */; };
+		C650C9FB2A2451E900A33C36 /* RateHistoryStub3.json in Resources */ = {isa = PBXBuildFile; fileRef = C650C9F32A2451E900A33C36 /* RateHistoryStub3.json */; };
+		C650C9FC2A2451E900A33C36 /* FamousCurrenciesStubs.json in Resources */ = {isa = PBXBuildFile; fileRef = C650C9F42A2451E900A33C36 /* FamousCurrenciesStubs.json */; };
+		C650C9FD2A2451E900A33C36 /* CurrencyDetailsStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9F52A2451E900A33C36 /* CurrencyDetailsStubs.swift */; };
+		C650C9FE2A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9F82A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift */; };
+		C650C9FF2A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9F92A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift */; };
+		C650CA022A2453C400A33C36 /* RateHistoryStub1.json in Sources */ = {isa = PBXBuildFile; fileRef = C650CA012A2453C400A33C36 /* RateHistoryStub1.json */; };
+		C650CA042A2453F400A33C36 /* RateHistoryStub2.json in Sources */ = {isa = PBXBuildFile; fileRef = C650CA032A2453F400A33C36 /* RateHistoryStub2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +167,13 @@
 		C650C9EA2A23B29900A33C36 /* CurrencyDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsRouter.swift; sourceTree = "<group>"; };
 		C650C9EC2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyDetailsRemoteDataSource.swift; sourceTree = "<group>"; };
 		C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		C650C9F32A2451E900A33C36 /* RateHistoryStub3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RateHistoryStub3.json; sourceTree = "<group>"; };
+		C650C9F42A2451E900A33C36 /* FamousCurrenciesStubs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FamousCurrenciesStubs.json; sourceTree = "<group>"; };
+		C650C9F52A2451E900A33C36 /* CurrencyDetailsStubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsStubs.swift; sourceTree = "<group>"; };
+		C650C9F82A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsRepositoryMock.swift; sourceTree = "<group>"; };
+		C650C9F92A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRateHistoryUseCaseTestCase.swift; sourceTree = "<group>"; };
+		C650CA012A2453C400A33C36 /* RateHistoryStub1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RateHistoryStub1.json; sourceTree = "<group>"; };
+		C650CA032A2453F400A33C36 /* RateHistoryStub2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RateHistoryStub2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				C62279152A2361AD008A71DC /* Currency Converter */,
+				C650C9F12A2451C400A33C36 /* Currency Details */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -457,16 +472,6 @@
 			path = Stubs;
 			sourceTree = "<group>";
 		};
-		C62278FD2A235307008A71DC /* Use Case Test Cases */ = {
-			isa = PBXGroup;
-			children = (
-				C62279292A23693F008A71DC /* Test Cases */,
-				C62278F92A235307008A71DC /* Stubs */,
-				C62278FE2A235307008A71DC /* Mocks */,
-			);
-			path = "Use Case Test Cases";
-			sourceTree = "<group>";
-		};
 		C62278FE2A235307008A71DC /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,7 +483,9 @@
 		C62279152A2361AD008A71DC /* Currency Converter */ = {
 			isa = PBXGroup;
 			children = (
-				C62278FD2A235307008A71DC /* Use Case Test Cases */,
+				C62279292A23693F008A71DC /* Test Cases */,
+				C62278F92A235307008A71DC /* Stubs */,
+				C62278FE2A235307008A71DC /* Mocks */,
 			);
 			path = "Currency Converter";
 			sourceTree = "<group>";
@@ -756,6 +763,44 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C650C9F12A2451C400A33C36 /* Currency Details */ = {
+			isa = PBXGroup;
+			children = (
+				C650C9F62A2451E900A33C36 /* Test Cases */,
+				C650C9F22A2451E900A33C36 /* Stubs */,
+				C650C9F72A2451E900A33C36 /* Mocks */,
+			);
+			path = "Currency Details";
+			sourceTree = "<group>";
+		};
+		C650C9F22A2451E900A33C36 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				C650C9F42A2451E900A33C36 /* FamousCurrenciesStubs.json */,
+				C650CA012A2453C400A33C36 /* RateHistoryStub1.json */,
+				C650CA032A2453F400A33C36 /* RateHistoryStub2.json */,
+				C650C9F32A2451E900A33C36 /* RateHistoryStub3.json */,
+				C650C9F52A2451E900A33C36 /* CurrencyDetailsStubs.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		C650C9F62A2451E900A33C36 /* Test Cases */ = {
+			isa = PBXGroup;
+			children = (
+				C650C9F92A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift */,
+			);
+			path = "Test Cases";
+			sourceTree = "<group>";
+		};
+		C650C9F72A2451E900A33C36 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				C650C9F82A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -850,7 +895,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C622790A2A235307008A71DC /* RateStub.json in Resources */,
+				C650C9FC2A2451E900A33C36 /* FamousCurrenciesStubs.json in Resources */,
 				C622790C2A235307008A71DC /* SymbolsStub.json in Resources */,
+				C650C9FB2A2451E900A33C36 /* RateHistoryStub3.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,9 +921,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C62279102A235307008A71DC /* FetchConversionRateUseCaseTestCase.swift in Sources */,
+				C650C9FF2A2451E900A33C36 /* FetchRateHistoryUseCaseTestCase.swift in Sources */,
+				C650CA022A2453C400A33C36 /* RateHistoryStub1.json in Sources */,
 				C622790D2A235307008A71DC /* CurrencyConverterRespositoryMock.swift in Sources */,
 				C622790B2A235307008A71DC /* CurrencyConverterStubs.swift in Sources */,
 				C622790E2A235307008A71DC /* FetchSymbolsUseCaseTestCase.swift in Sources */,
+				C650C9FD2A2451E900A33C36 /* CurrencyDetailsStubs.swift in Sources */,
+				C650C9FE2A2451E900A33C36 /* CurrencyDetailsRepositoryMock.swift in Sources */,
+				C650CA042A2453F400A33C36 /* RateHistoryStub2.json in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

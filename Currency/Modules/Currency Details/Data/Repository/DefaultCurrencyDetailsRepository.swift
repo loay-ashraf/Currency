@@ -14,8 +14,5 @@ class DefaultCurrencyDetailsRepository: CurrencyDetailsRepository {
     }
     func fectchRateHistory(_ date: String, _ target: String) -> Observable<Double> {
         dataSource.fetchRateHistory(date, target)
-            .compactMap {
-                $0.rates.values.first
-            }
     }
 }

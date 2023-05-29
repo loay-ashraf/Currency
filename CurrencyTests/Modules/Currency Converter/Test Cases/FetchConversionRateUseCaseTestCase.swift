@@ -31,14 +31,14 @@ class FetchConversionRateUseCaseTestCase: XCTestCase {
         // When
         sut.execute("EUR", "USD", 5.0)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] conversionResult in
+            .subscribe(onNext: { [weak self] sutOutput in
                 // Then
                 guard let self = self,
-                      let rateResult = self.mock.rateResult  else { return }
+                      let mockOutput = self.mock.rateResult  else { return }
                 XCTAssertTrue(self.mock.fetchConversionRateCalled)
-                XCTAssertNotNil(rateResult)
-                XCTAssertNotNil(conversionResult.value)
-                XCTAssertEqual(rateResult * 5.0, conversionResult.value)
+                XCTAssertNotNil(mockOutput)
+                XCTAssertNotNil(sutOutput.value)
+                XCTAssertEqual(mockOutput * 5.0, sutOutput.value)
                 promise.fulfill()
             }, onError: { _ in
                 XCTFail("Failed to fetch the conversion rate.")

@@ -31,16 +31,16 @@ class FetchSymbolsUseCaseTestCase: XCTestCase {
         // When
         sut.execute()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] symbols in
+            .subscribe(onNext: { [weak self] sutOutput in
                 // Then
                 guard let self = self,
-                      let symbolsResult = self.mock.symbolsResult?.sorted() else { return }
+                      let mockOutput = self.mock.symbolsResult?.sorted() else { return }
                 XCTAssertTrue(self.mock.fetchSymbolsCalled)
-                XCTAssertNotNil(symbols)
-                XCTAssertNotNil(symbolsResult)
-                XCTAssertEqual(symbols.value.sorted()[0].count, symbolsResult[0].count)
-                XCTAssertEqual(symbols.value.count, symbolsResult.count)
-                XCTAssertEqual(symbols.value.sorted(), symbolsResult)
+                XCTAssertNotNil(sutOutput)
+                XCTAssertNotNil(mockOutput)
+                XCTAssertEqual(sutOutput.value.sorted()[0].count, mockOutput[0].count)
+                XCTAssertEqual(sutOutput.value.count, mockOutput.count)
+                XCTAssertEqual(sutOutput.value.sorted(), mockOutput)
                 promise.fulfill()
             }, onError: { _ in
                 XCTFail("Failed to fetch symbols.")
