@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import RxSwift
 import RxCocoa
 
@@ -14,8 +15,10 @@ class CurrencyDetailsViewController: UIViewController {
     var viewModel: CurrencyDetailsViewModel?
     weak var coordinator: AppCoordinator?
     // MARK: - Private Properties
+    private var chartViewBindingMediator = RxBindingMediator<[CurrencyRateHistoryRecordPresentationModel]>(input: .init(value: []), output: [])
     private let disposeBag = DisposeBag()
     // MARK: - UI Outlets
+    @IBOutlet weak var rateHistorychartView: UIView!
     @IBOutlet weak var rateHistoryTableView: UITableView!
     @IBOutlet weak var ratesTableView: UITableView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -35,7 +38,7 @@ class CurrencyDetailsViewController: UIViewController {
         navigationItem.title = "Currency Details"
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        // REgister cells fot table views
+        // Register cells fot table views
         rateHistoryTableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         ratesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         // Setup table view styles (colors, shadows and corner radii)
@@ -49,6 +52,16 @@ class CurrencyDetailsViewController: UIViewController {
         ratesTableView.layer.borderWidth = 2.0
         ratesTableView.layer.cornerCurve = .continuous
         ratesTableView.layer.cornerRadius = 10.0
+        // Setup chart view (inject binding mediator and activate required constraints)
+        let chartView = CurrencyRateHistoryChartView(bindingMediator: chartViewBindingMediator)
+        let chartHostingController = UIHostingController(rootView: chartView)
+        addChild(chartHostingController)
+        rateHistorychartView.addSubview(chartHostingController.view)
+        chartHostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([chartHostingController.view.topAnchor.constraint(equalTo: rateHistorychartView.topAnchor),
+                                     chartHostingController.view.bottomAnchor.constraint(equalTo: rateHistorychartView.bottomAnchor),
+                                     chartHostingController.view.leadingAnchor.constraint(equalTo: rateHistorychartView.leadingAnchor),
+                                     chartHostingController.view.trailingAnchor.constraint(equalTo: rateHistorychartView.trailingAnchor)])
     }
     
     /// sets up UI reacive bindings for inputs and outputs
@@ -67,6 +80,14 @@ class CurrencyDetailsViewController: UIViewController {
                 let alertController = UIAlertController(title: "Error", message: "An error occured.\n\($0.localizedDescription)", preferredStyle: .alert)
                 alertController.addAction(.init(title: "Ok", style: .default))
                 self?.present(alertController, animated: true)
+            })
+            .disposed(by: disposeBag)
+        viewModel?.rateHistory
+            .drive(onNext: { [weak self] in
+                let mappedData = $0.map {
+                    CurrencyRateHistoryRecordPresentationModel(form: $0)
+                }
+                self?.chartViewBindingMediator.input.accept(mappedData)
             })
             .disposed(by: disposeBag)
         viewModel?.rateHistory
