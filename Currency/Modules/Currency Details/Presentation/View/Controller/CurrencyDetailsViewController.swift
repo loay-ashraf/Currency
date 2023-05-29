@@ -29,7 +29,7 @@ class CurrencyDetailsViewController: UIViewController {
     }
     private func setupOutputBindings() {
         viewModel?.viewState
-            .map({ [.loading(loadType: .initial), .loading(loadType: .baseDriven), .loading(loadType: .targetDriven)].contains($0) })
+            .map({ [.loading(loadType: .initial)].contains($0) })
             .bind(to: loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         viewModel?.error
@@ -48,15 +48,5 @@ class CurrencyDetailsViewController: UIViewController {
     }
     private func startLoading() {
         viewModel?.viewState.accept(.loading(loadType: .initial))
-    }
-}
-
-class TableViewCell: UITableViewCell {
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

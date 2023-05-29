@@ -70,6 +70,7 @@
 		C650C9E92A2394A200A33C36 /* CurrencyRateHistoryJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9E82A2394A200A33C36 /* CurrencyRateHistoryJSONModel.swift */; };
 		C650C9EB2A23B29900A33C36 /* CurrencyDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EA2A23B29900A33C36 /* CurrencyDetailsRouter.swift */; };
 		C650C9ED2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EC2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift */; };
+		C650C9F02A23DFEE00A33C36 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 		C650C9E82A2394A200A33C36 /* CurrencyRateHistoryJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateHistoryJSONModel.swift; sourceTree = "<group>"; };
 		C650C9EA2A23B29900A33C36 /* CurrencyDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsRouter.swift; sourceTree = "<group>"; };
 		C650C9EC2A23B37300A33C36 /* DefaultCurrencyDetailsRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyDetailsRemoteDataSource.swift; sourceTree = "<group>"; };
+		C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -629,6 +631,7 @@
 		C650C9C02A238AE900A33C36 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C650C9EE2A23DFE400A33C36 /* Cell */,
 				C650C9C92A238D3B00A33C36 /* State */,
 				C650C9C12A238AF800A33C36 /* Storyboard */,
 				C650C9C22A238B0900A33C36 /* Controller */,
@@ -743,6 +746,14 @@
 				C650C9E02A23926400A33C36 /* DefaultFetchRateHistoryUseCase.swift */,
 			);
 			path = Implementation;
+			sourceTree = "<group>";
+		};
+		C650C9EE2A23DFE400A33C36 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C650C9EF2A23DFEE00A33C36 /* TableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -906,6 +917,7 @@
 				C63EF7982A221EAA00A482EB /* AppDelegate.swift in Sources */,
 				C650C9E72A23944C00A33C36 /* CurrencyDetailsRemoteDataSource.swift in Sources */,
 				C62278E22A229042008A71DC /* CurrencyConverterViewModel.swift in Sources */,
+				C650C9F02A23DFEE00A33C36 /* TableViewCell.swift in Sources */,
 				C62278D42A227F87008A71DC /* HTTPURLResponse+StatusCode.swift in Sources */,
 				C650C9D12A238DFF00A33C36 /* CurrencyDetailsViewLoadType.swift in Sources */,
 				C63EF79A2A221EAA00A482EB /* SceneDelegate.swift in Sources */,
