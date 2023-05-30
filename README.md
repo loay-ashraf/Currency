@@ -28,12 +28,7 @@
 
 ## Video Demo:
 
-<p align="center">
-<video width="200" height="433" controls muted markdown="1">
-  <source src="Media/Demo.mp4" type="video/mp4">
-
-</video>
-</p>
+https://github.com/loay-ashraf/Currency/assets/40588058/5514347f-0d99-4e1c-8679-d0e92b245435
 
 ## Notes:
 
