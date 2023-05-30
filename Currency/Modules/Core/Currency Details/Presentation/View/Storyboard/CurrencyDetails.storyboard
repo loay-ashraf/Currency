@@ -17,54 +17,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bFS-Lk-0rj">
-                                <rect key="frame" x="20" y="79" width="353.33333333333331" height="753"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="bFS-Lk-0rj">
+                                <rect key="frame" x="20" y="99" width="353" height="713"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Un-0w-wCm">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="LgB-cg-WYi">
+                                                <variation key="heightClass=compact-widthClass=regular" constant="100"/>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nRL-Ui-wUA">
-                                        <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="753"/>
+                                        <rect key="frame" x="0.0" y="190" width="353" height="523"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bD7-Yw-xks">
-                                                <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="753"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="523"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="753" id="1oy-PC-DNF"/>
-                                                    <constraint firstAttribute="width" constant="171.66999999999999" id="SM8-g5-D28"/>
-                                                </constraints>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Wgh-xE-Xhq">
-                                                <rect key="frame" x="181.66666666666669" y="0.0" width="171.66666666666669" height="753"/>
+                                                <rect key="frame" x="181.66666666666663" y="0.0" width="171.33333333333337" height="523"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="171.66999999999999" id="UkE-Js-zGg"/>
-                                                    <constraint firstAttribute="height" constant="753" id="dG0-qN-auo"/>
-                                                </constraints>
                                             </tableView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Wgh-xE-Xhq" secondAttribute="bottom" id="9YI-p5-hbC"/>
+                                            <constraint firstItem="bD7-Yw-xks" firstAttribute="top" secondItem="nRL-Ui-wUA" secondAttribute="top" id="DhW-sz-HIb"/>
+                                            <constraint firstAttribute="bottom" secondItem="bD7-Yw-xks" secondAttribute="bottom" id="G1e-xY-Nt1"/>
+                                            <constraint firstItem="Wgh-xE-Xhq" firstAttribute="top" secondItem="nRL-Ui-wUA" secondAttribute="top" id="tQw-nM-mtx"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="nRL-Ui-wUA" firstAttribute="leading" secondItem="bFS-Lk-0rj" secondAttribute="leading" id="FYs-08-Zdz"/>
+                                    <constraint firstItem="7Un-0w-wCm" firstAttribute="leading" secondItem="bFS-Lk-0rj" secondAttribute="leadingMargin" id="4g3-2i-TZD"/>
+                                    <constraint firstItem="nRL-Ui-wUA" firstAttribute="leading" secondItem="bFS-Lk-0rj" secondAttribute="leading" id="EYb-dt-lmf"/>
+                                    <constraint firstAttribute="bottom" secondItem="nRL-Ui-wUA" secondAttribute="bottom" id="Lw6-bw-e2r"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="7Un-0w-wCm" secondAttribute="trailing" id="fHw-MO-Qba"/>
+                                    <constraint firstItem="nRL-Ui-wUA" firstAttribute="top" secondItem="7Un-0w-wCm" secondAttribute="bottom" constant="40" id="g72-Mu-Kde"/>
+                                    <constraint firstAttribute="trailing" secondItem="nRL-Ui-wUA" secondAttribute="trailing" id="z7T-Yc-cIo"/>
                                 </constraints>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="vGk-3f-OEe">
                                 <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
-                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bFS-Lk-0rj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Rp5-xZ-KFw"/>
                             <constraint firstAttribute="trailing" secondItem="bFS-Lk-0rj" secondAttribute="trailing" constant="20" id="ZmL-fb-zkE"/>
                             <constraint firstItem="vGk-3f-OEe" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="bSJ-qz-9tC"/>
-                            <constraint firstAttribute="bottom" secondItem="bFS-Lk-0rj" secondAttribute="bottom" constant="20" id="djS-a1-c5b"/>
-                            <constraint firstItem="bFS-Lk-0rj" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="mjy-mD-hV3"/>
+                            <constraint firstAttribute="bottom" secondItem="bFS-Lk-0rj" secondAttribute="bottom" constant="40" id="djS-a1-c5b"/>
+                            <constraint firstItem="bFS-Lk-0rj" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="40" id="mjy-mD-hV3"/>
+                            <constraint firstItem="bFS-Lk-0rj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="mkT-Jo-CXk"/>
                             <constraint firstItem="vGk-3f-OEe" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="y12-iV-XO7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loadingIndicator" destination="vGk-3f-OEe" id="ACV-pJ-jpl"/>
                         <outlet property="rateHistoryTableView" destination="bD7-Yw-xks" id="BlV-71-2v0"/>
+                        <outlet property="rateHistorychartView" destination="7Un-0w-wCm" id="vuf-P9-wVu"/>
                         <outlet property="ratesTableView" destination="Wgh-xE-Xhq" id="sVy-Ne-YRU"/>
                         <outlet property="view" destination="bD7-Yw-xks" id="SxP-KD-hIa"/>
                     </connections>

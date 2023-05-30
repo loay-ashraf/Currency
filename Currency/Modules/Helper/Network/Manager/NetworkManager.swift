@@ -31,10 +31,18 @@ class NetworkManager {
             .map { response, data in
                 guard let networkError = NetworkError(response) else {
                     let jsonDecoder = JSONDecoder()
-                    print(data.prettyPrintedJSONString!)
-                    let model = try jsonDecoder.decode(T.self, from: data)
-                    dump(model)
-                    return model
+                    do {
+                        print(data.prettyPrintedJSONString!)
+                        let model = try jsonDecoder.decode(T.self, from: data)
+                        dump(model)
+                        return model
+                    } catch {
+                        if let errorModel = try? jsonDecoder.decode(DefaultNetworkAPIError.self, from: data) {
+                            throw errorModel
+                        } else {
+                            throw NetworkError.client(.serialization(error))
+                        }
+                    }
                 }
                 throw networkError
             }
