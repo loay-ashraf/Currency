@@ -31,7 +31,9 @@
 ## Video Preview Portrait and Landscape:
 
 <p align="center">
-<video src="Media/Demo.mp4" width="200" height="433">
+<video width="200" height="433" controls markdown="0">
+  <source src="Media/Demo.mp4" type="video/mp4">
+</video>
 </p>
 
 
