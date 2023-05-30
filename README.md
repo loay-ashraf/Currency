@@ -24,8 +24,6 @@
 - Data Layer = Repositories Implementations + Remote (API) + Data Model
 - Presentation Layer (MVVM) = ViewController - ViewModels - Views ( Custom Cells, Headers, etc ..) 
 
-***Look at this diagaram will explain how Clean Architecture works***
-
 ![CleanArchitectureDependencies](https://user-images.githubusercontent.com/72504852/221656809-fcde020e-f7d9-48eb-964e-1f9fe2b07718.png)
 
 ## Video Demo:
@@ -33,9 +31,9 @@
 <p align="center">
 <video width="200" height="433" controls muted markdown="1">
   <source src="Media/Demo.mp4" type="video/mp4">
+
 </video>
 </p>
-
 
 ## Notes:
 
