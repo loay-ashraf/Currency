@@ -28,10 +28,10 @@
 
 ![CleanArchitectureDependencies](https://user-images.githubusercontent.com/72504852/221656809-fcde020e-f7d9-48eb-964e-1f9fe2b07718.png)
 
-## Video Preview Portrait and Landscape:
+## Video Demo:
 
 <p align="center">
-<video width="200" height="433" controls markdown="0">
+<video width="200" height="433" controls muted markdown="1">
   <source src="Media/Demo.mp4" type="video/mp4">
 </video>
 </p>
