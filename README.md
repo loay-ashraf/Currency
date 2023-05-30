@@ -10,14 +10,6 @@
 - Unit Testing with Mocks and Stubs.
 - Uses Swift Package Manager for managing Dependencies.
 
-## Screenshots: 
-
-<p align="center">
-<img src="Media/Converter-1.png" width="200" height="433">
-<img src="Media/Converter-2.png" width="200" height="433">
-<img src="Media/Converter-3.png" width="200" height="433">
-</p>
-
 ## Project Layers: 
 
 - Domain Layer = Entities + Use Cases + Repositories Interfaces
@@ -26,7 +18,15 @@
 
 ![CleanArchitectureDependencies](https://user-images.githubusercontent.com/72504852/221656809-fcde020e-f7d9-48eb-964e-1f9fe2b07718.png)
 
-## Video Demo:
+## Screenshots: 
+
+<p align="center">
+<img src="Media/Converter-1.png" width="200" height="433">
+<img src="Media/Converter-2.png" width="200" height="433">
+<img src="Media/Converter-3.png" width="200" height="433">
+</p>
+
+## Demo Video:
 
 https://github.com/loay-ashraf/Currency/assets/40588058/5514347f-0d99-4e1c-8679-d0e92b245435
 
