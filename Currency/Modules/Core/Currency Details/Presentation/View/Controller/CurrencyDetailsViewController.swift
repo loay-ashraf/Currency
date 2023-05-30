@@ -77,9 +77,7 @@ class CurrencyDetailsViewController: UIViewController {
             .disposed(by: disposeBag)
         viewModel?.error
             .drive(onNext: { [weak self] in
-                let alertController = UIAlertController(title: "Error", message: "An error occured.\n\($0.localizedDescription)", preferredStyle: .alert)
-                alertController.addAction(.init(title: "Ok", style: .default))
-                self?.present(alertController, animated: true)
+                self?.presentError($0)
             })
             .disposed(by: disposeBag)
         viewModel?.rateHistory
