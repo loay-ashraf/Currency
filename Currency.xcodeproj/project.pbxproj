@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60B322C2A258EAF00702668 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B322B2A258EAF00702668 /* NetworkReachability.swift */; };
+		C60B322E2A25900D00702668 /* UIViewController+presentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B322D2A25900D00702668 /* UIViewController+presentError.swift */; };
 		C62278892A222609008A71DC /* CurrencyConverter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62278882A222609008A71DC /* CurrencyConverter.storyboard */; };
 		C622788D2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */; };
 		C622789B2A2245E3008A71DC /* CurrencyConversionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C622789A2A2245E3008A71DC /* CurrencyConversionResult.swift */; };
@@ -123,6 +125,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C60B322B2A258EAF00702668 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		C60B322D2A25900D00702668 /* UIViewController+presentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentError.swift"; sourceTree = "<group>"; };
 		C62278882A222609008A71DC /* CurrencyConverter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrencyConverter.storyboard; sourceTree = "<group>"; };
 		C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SetRadiusAndShadow.swift"; sourceTree = "<group>"; };
 		C622789A2A2245E3008A71DC /* CurrencyConversionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionResult.swift; sourceTree = "<group>"; };
@@ -234,6 +238,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C60B322A2A258E9B00702668 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				C60B322B2A258EAF00702668 /* NetworkReachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		C622787B2A222473008A71DC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +378,7 @@
 			children = (
 				C622788C2A2234E8008A71DC /* UIView+SetRadiusAndShadow.swift */,
 				C650CA1A2A24B5C400A33C36 /* UIViewController+Storyboardable.swift */,
+				C60B322D2A25900D00702668 /* UIViewController+presentError.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,6 +423,7 @@
 		C62278B22A227850008A71DC /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C60B322A2A258E9B00702668 /* Reachability */,
 				C62278C72A227F3F008A71DC /* Error */,
 				C62278BB2A227A06008A71DC /* HTTP */,
 				C62278B42A227876008A71DC /* Router */,
@@ -1072,6 +1086,7 @@
 			files = (
 				C62278CE2A227F3F008A71DC /* NetworkServerError.swift in Sources */,
 				C622789D2A224639008A71DC /* CurrencySymbols.swift in Sources */,
+				C60B322C2A258EAF00702668 /* NetworkReachability.swift in Sources */,
 				C62278A92A224BD2008A71DC /* CurrencyConverterRepository.swift in Sources */,
 				C62718182A254177005D7C3A /* CurrencyRateHistoryChartView.swift in Sources */,
 				C627181A2A2544D8005D7C3A /* CurrencyRateHistoryRecordPresentationModel.swift in Sources */,
@@ -1111,6 +1126,7 @@
 				C62278DC2A2285EA008A71DC /* CurrencyConversionRateJSONModel.swift in Sources */,
 				C62278B92A2278E0008A71DC /* NetworkRouter.swift in Sources */,
 				C62278EA2A2299ED008A71DC /* CurrencyConverterViewLoadType.swift in Sources */,
+				C60B322E2A25900D00702668 /* UIViewController+presentError.swift in Sources */,
 				C650C9DB2A23914000A33C36 /* CurrencyRateHistoryRecord.swift in Sources */,
 				C627181D2A256C92005D7C3A /* RxBindingMediator.swift in Sources */,
 				C63EF7982A221EAA00A482EB /* AppDelegate.swift in Sources */,

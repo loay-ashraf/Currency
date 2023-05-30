@@ -10,4 +10,5 @@ enum NetworkClientError: Error {
     case http(HTTPStatusCode)
     case serialization(Error)
     case transport(Error)
+    case notConnected
 }

@@ -22,6 +22,9 @@ class NetworkManager {
     ///
     /// - Returns: generic `Observable` sequence that emits decoded response or an error.
     func request<T: Decodable>(using router: NetworkRouter) -> Observable<T> {
+        guard NetworkReachability.isConnectedToNetwork() else {
+            return Observable<T>.error(NetworkError.client(.notConnected))
+        }
         let request = router.asURLRequest()
         dump(request)
         let responseObservable = URLSession.shared.rx.response(request: request)
