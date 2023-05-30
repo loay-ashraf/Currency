@@ -1,0 +1,10 @@
+{
+  "success" : true,
+  "rates" : {
+    "CAD" : 1.4601390000000001
+  },
+  "timestamp" : 1685330763,
+  "historical" : true,
+  "base" : "EUR",
+  "date" : "2023-05-29"
+}
